@@ -21,4 +21,4 @@ RUN case "${TARGETARCH}" in \
 COPY blog.conf /etc/nginx/http.d/default.conf
 COPY www/blog/ /var/www/blog/
 
-CMD ["sh", "-c", "nginx && ./v2ray run -c /etc/v2ray/config.json"]
+CMD ["sh", "-c", "nginx && /app/v2ray run -c /etc/v2ray/config.json"]
