@@ -1,0 +1,229 @@
+  <!DOCTYPE html>
+  <html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>What is du? | Deyao’s Blog</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="What is du?" />
+<meta name="author" content="Deyao Chen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="When I first learned integrations by substitution, I saw \(\frac{\mathrm{d}u}{\mathrm{d}x}\) get rearranged to \(\mathrm{d}u=⋯\mathrm{d}x\). My first reaction when I saw it was" />
+<meta property="og:description" content="When I first learned integrations by substitution, I saw \(\frac{\mathrm{d}u}{\mathrm{d}x}\) get rearranged to \(\mathrm{d}u=⋯\mathrm{d}x\). My first reaction when I saw it was" />
+<meta property="og:site_name" content="Deyao’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-08T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="What is du?" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Deyao Chen"},"dateModified":"2020-09-08T00:00:00+00:00","datePublished":"2020-09-08T00:00:00+00:00","description":"When I first learned integrations by substitution, I saw \\(\\frac{\\mathrm{d}u}{\\mathrm{d}x}\\) get rearranged to \\(\\mathrm{d}u=⋯\\mathrm{d}x\\). My first reaction when I saw it was","headline":"What is du?","mainEntityOfPage":{"@type":"WebPage","@id":"/2020/09/08/what-is-du.html"},"url":"/2020/09/08/what-is-du.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Deyao&#39;s Blog</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">What is du?</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-09-08T00:00:00+00:00" itemprop="datePublished">Sep 8, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>When I first learned integrations by substitution, I saw \(\frac{\mathrm{d}u}{\mathrm{d}x}\) get rearranged to \(\mathrm{d}u=⋯\mathrm{d}x\). My first reaction when I saw it was</p>
+
+<h2 id="wtf"><center>WTF?????</center></h2>
+<center>How can you just do that???</center>
+
+<p>\(\mathrm{d}x\) basically specifies the variable to change in differentiations and integrations. It reads in English “with respect to x”, which is kind of like an operator. Putting it by itself without context makes no sense; it’s like writing \(\div 3=x\), or saying “with respect to \(x\) equals to …”. It’s literally an imcomplete sentence! What with respect to \(x\)? But it somehow works. How???</p>
+
+<p>So I took some time to go back to the meaning of the notations, the root of these rules and finally figured out (I think). Disclaimer: my interpretation is just one of many, perhaps a really basic one, or straight up wrong. I couldn’t find anything online to verify or disprove my interpretation, so please point out any mistake I made.</p>
+
+<h2 id="what-does-fracmathrmdmathrmdx-meaan-and-is-it-a-fraction">What does \(\frac{\mathrm{d}}{\mathrm{d}x}\) meaan? (And is it a fraction?)</h2>
+
+<p>Let’s start with the basic definition of differentiations, explained by limits.</p>
+
+<center>$$\displaystyle \frac{\mathrm{d}}{\mathrm{d}x} f(x)= \lim_{k \to 0} ⁡\frac{f(x+k)-f(x)}{k}$$</center>
+
+<p>It is important to note that \(x\) doesn’t have to be \(x\), it can be any other variable, or even a function like</p>
+
+<center>$$\displaystyle \frac{\mathrm{d}}{\mathrm{d}g(x)}f(g(x))=\lim_{k \to 0} \frac{f(g(x)+k)-f(g(x))}{k}$$</center>
+
+<p>Also \(\frac{\mathrm{d}}{\mathrm{d}x}\) is not a fraction; it is simply just an operator, like \(\div x\), so we can’t say \(\frac{\mathrm{d}}{\mathrm{d}x}f(x)=\frac{\mathrm{d}f(x)}{\mathrm{d}x}\)(at least not without the special trick we will see later).</p>
+
+<h2 id="the-chain-rule-and-its-influence-on-notations">The chain rule and its influence on notations</h2>
+
+<p>A very important part of calculus is the chain rule. Using the notations we just established, the chain rule is as follows:</p>
+
+<center>$$\displaystyle \frac{\mathrm{d}}{\mathrm{d}x}
+ f(g(x))=\frac{\mathrm{d}}{\mathrm{d}x}
+ g(x) \cdot \frac{\mathrm{d}}{\mathrm{d}g(x)}
+f(g(x))$$</center>
+
+<p>The proof of chain rule is quite long and complicated, so we won’t delve into that. Later when we introduce the new notations, even though the rule will look legitimate with “cancelling”, remember it looks that way only because we choose to fit the notations to the rule.</p>
+
+<p>Now Leibniz probably noticed that chain rule behaves awfully similar to fractions if it was written in a certain way. That is if we let loose of our loyalty to the actual meaning of things a bit and allow us to treat \(\frac{\mathrm{d}}{\mathrm{d}x}\) as a fraction (even though it is not):</p>
+
+<center>$$\displaystyle \frac{\mathrm{d}f(g(x))}{\mathrm{d}x}
+=\frac{\mathrm{d}g(x)}{\mathrm{d}x}
+\cdot \frac{\mathrm{d}f(g(x))}{\mathrm{d}g(x)}$$</center>
+
+<p>or more concisely</p>
+
+<center>$$\displaystyle \frac{\mathrm{d}z}{\mathrm{d}x}=\frac{\mathrm{d}y}{\mathrm{d}x}\cdot\frac{\mathrm{d}z}{\mathrm{d}y}$$</center>
+
+<p>The \(\mathrm{d}y\) on the right side nicely “cancels out” like a fraction. But in the midst of beautiful notations, we must remember that nothing actually “cancels out”, the only thing that is happening is the chain rule, and we (or Leibniz) chose to write it in a way so that it creates the illusion that something “cancels out” like a fraction.</p>
+
+<h2 id="notations-and-integration-by-parts">Notations and integration by parts</h2>
+
+<p>Integration notion is designed to maintain the illusion. Notice that</p>
+
+<center>$$\displaystyle \int \frac{\mathrm{d}y}{\mathrm{d}x}\mathrm{d}x = y + C$$</center>
+
+<p>It looks like the \(\mathrm{d}x\) cancelled out when in fact it is just how we defined the integral.</p>
+
+<p>The extended illusion allows us to use some tricks when we solve integration by substitution problems. Integration by substitution is:</p>
+
+<center>$$\displaystyle \int z(y) \cdot \frac{\mathrm{d}y}{\mathrm{d}x} \; \mathrm{d}x=\int z(y) \; \mathrm{d}y$$</center>
+
+<p>Again, even though it looks like \(\mathrm{d}x\) cancelled out like a fraction, in reality only the chain rule is used. These nicely sustained illusions allow us to use notational tricks when we are solving problems. For example, suppose we want to solve for the integral on the left side, we can</p>
+
+<center>$$\displaystyle \begin{aligned}
+u &amp;= y \\
+\frac{\mathrm{d}}{\mathrm{d}x} u &amp;= \frac{\mathrm{d}}{\mathrm{d}x} y \; \text{(perfectly legitimate and meaningful)} \\
+\frac{\mathrm{d}u}{\mathrm{d}x} &amp;= \frac{\mathrm{d}y}{\mathrm{d}x} \; \text{(beginning of notational tricks)} \\
+\mathrm{d}u &amp;= \frac{\mathrm{d}u}{\mathrm{d}x} \mathrm{d}x \; \text{(meaningless)}\\
+\int z(y) \cdot \frac{\mathrm{d}y}{\mathrm{d}x} \; \mathrm{d} x &amp;=\int z(u) \; \mathrm{d}u \; \text{(meaningful and true)}
+\end{aligned}$$</center>
+
+<p>I want to emphasize we can do these only because the notations are well designed such that we can enter a meaningless notational world and exit it correctly. Using these tricks require caution. There are some obvious mistakes. For example,</p>
+
+<center>$$\displaystyle 
+\frac{d}{dx}x^{2} = \frac{dx}{dx}x = x$$</center>
+
+<p>The appearance that the things looks like fractions and behave sometimes like fractions (and sometimes not) is a constant source of confusion (as least for me).</p>
+
+<p>To illustrate the point that the seemingly sensible and self-evident tricks are just an illusion of a well-designed notational system, I am going to design two alternative notational system, in one of which the tricks would simply not work, in the other the tricks will lead to false results.</p>
+
+<h2 id="notational-system-to-which-no-trick-can-be-applied">Notational system to which no trick can be applied</h2>
+
+<p>Write differentiation as \(cx \vert f(x)\), which means \(\frac{\mathrm{d}}{\mathrm{d}x} f(x)\) in the normal system.</p>
+
+<p>Now the chain rule writes:</p>
+
+<center>$$\displaystyle cx \vert z = cx \vert y \cdot cy \vert z$$</center>
+
+<p>Write integration as</p>
+
+<center>$$\displaystyle \int cx \vert z(x)$$</center>
+<center>which means</center>
+<center>$$\displaystyle \int z(x) \; \mathrm{d}x$$</center>
+<center>in the normal system.</center>
+
+<p>So now integration by substitution writes as</p>
+<center>$$\displaystyle \int cx \vert \left(z(x) \cdot cx \vert y \right) = \int cy \vert z(y)$$</center>
+
+<p>As you see, nothing “cancels out” like the way our current system does, and we can’t write \(cu=⋯cx\) and substitute it in.</p>
+
+<h2 id="notational-system-in-which-using-trick-will-lead-to-false-result">Notational system in which using trick will lead to false result</h2>
+
+<p>Write differentiation as \(\frac{ox}{of(x)}\). It means the same as \(\frac{\mathrm{d}}{\mathrm{d}x} f(x)\) in the normal system. It is very similar to the normal one, except that everything is upside down.</p>
+
+<p>Now the chain rule writes:</p>
+
+<center>$$\displaystyle \frac{ox}{oz} = \frac{ox}{oy} \cdot \frac{oy}{oz}$$</center>
+
+<p>Things seem to “cancel out” quite nicely.</p>
+
+<center>$$\displaystyle \int\frac{ox}{oy}\;ox=y+C$$</center>
+
+<p>So now integration by substitution writes as</p>
+
+<center>$$\displaystyle \int z(y) \cdot \frac{ox}{oy}\;ox = \int z(y) \; oy$$</center>
+
+<p>Now if we use the same tricks</p>
+
+<center>$$\displaystyle \begin{aligned}
+u &amp;= y \\
+\frac{ox}{ou} &amp;= \frac{ox}{oy} \\
+oy &amp;= \frac{ou}{ox}\;ox \\
+\int z(y) \cdot oy &amp; = \int z(u)\frac{ou}{ox}\;ox\; \left(\text{which is} \int z(u) \cdot \frac{\mathrm{d}x}{\mathrm{d}u}\;\mathrm{d}x \; \text{in normal notations}\right)
+\end{aligned}$$</center>
+
+<p>Which is clearly false.</p>
+
+<p>As you can see, much of the integration techniques we use has no meaning but instead are just notational tricks. That’s why it can be confusing at times and lead to mistakes if one is not careful. Thank you for making it this far. Hopefully that was clear and interesting.</p>
+
+<p xmlns:dct="https://purl.org/dc/terms/" xmlns:vcard="https://www.w3.org/2001/vcard-rdf/3.0#">
+  <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
+    <img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" />
+  </a>
+  <br />
+  To the extent possible under law,
+  <span resource="[_:publisher]" rel="dct:publisher">
+    <span property="dct:title">Deyao Chen</span></span>
+  has waived all copyright and related or neighboring rights to
+  <span property="dct:title">What is du?</span>.
+This work is published from:
+<span property="vcard:Country" datatype="dct:ISO3166" content="HK" about="[_:publisher]">
+  Hong Kong</span>.
+</p>
+
+  </div><a class="u-url" href="/2020/09/08/what-is-du.html" hidden></a>
+</article>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Deyao Chen</li><li><a class="u-email" href="mailto:chendeyao000@gmail.com">chendeyao000@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/de0ch"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">de0ch</span></a></li><li><a href="https://instagram.com/deyaochen"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">deyaochen</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I am just another person trying to do something useful for the world. I write mostly about math and programming, occasionally about some other randoms thoughts I have.
+</p><p><a href="https://github.com/de0ch/de0ch.github.io">Source Code on Github</a></p></div>
+    </div>
+
+  </div>
+
+</footer>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>          
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+  </body>
+  
+  </html>
+  

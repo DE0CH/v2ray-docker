@@ -1,0 +1,118 @@
+  <!DOCTYPE html>
+  <html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>NAT Is Good, I hope it still exists for IPv6 | Deyao’s Blog</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="NAT Is Good, I hope it still exists for IPv6" />
+<meta name="author" content="Deyao Chen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I used to hate Network Translation Layer (NAT) because it made hosting anything so much more complicated. It also makes devices waste a lot of power because they have to constantly poll a server to receive push notifications. IPv6 is supposed to address this problem so decided to experiment with it. Although the experiment failed (I still mostly use IPv4), I began to see several huge advantages of NAT." />
+<meta property="og:description" content="I used to hate Network Translation Layer (NAT) because it made hosting anything so much more complicated. It also makes devices waste a lot of power because they have to constantly poll a server to receive push notifications. IPv6 is supposed to address this problem so decided to experiment with it. Although the experiment failed (I still mostly use IPv4), I began to see several huge advantages of NAT." />
+<meta property="og:site_name" content="Deyao’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="NAT Is Good, I hope it still exists for IPv6" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Deyao Chen"},"dateModified":"2023-11-12T00:00:00+00:00","datePublished":"2023-11-12T00:00:00+00:00","description":"I used to hate Network Translation Layer (NAT) because it made hosting anything so much more complicated. It also makes devices waste a lot of power because they have to constantly poll a server to receive push notifications. IPv6 is supposed to address this problem so decided to experiment with it. Although the experiment failed (I still mostly use IPv4), I began to see several huge advantages of NAT.","headline":"NAT Is Good, I hope it still exists for IPv6","mainEntityOfPage":{"@type":"WebPage","@id":"/2023/11/12/nat-good.html"},"url":"/2023/11/12/nat-good.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Deyao&#39;s Blog</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">NAT Is Good, I hope it still exists for IPv6</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-11-12T00:00:00+00:00" itemprop="datePublished">Nov 12, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>I used to hate Network Translation Layer (NAT) because it made hosting anything so much more complicated. It also makes devices waste a lot of power because they have to constantly poll a server to receive push notifications. IPv6 is supposed to address this problem so decided to experiment with it. Although the experiment failed (I still mostly use IPv4), I began to see several huge advantages of NAT.</p>
+
+<h2 id="briefly-how-nat-works">Briefly, How NAT Works</h2>
+
+<p>IP addresses are like physical addresses: they tell the network routers between two devices where to send data. Theoretically, each device should have its own IP address so it can be unambiguously addressed. Because of the limited number of IPv4 addresses, it’s physically impossible to give every device its own IP address. Thankfully, most of the internet works on TCP or UDP which uses port numbers to address intended to address different programs running on the same computer. For example, an SSH server might listen on port 22 while an HTTP server might listen on port 80. There’s no reason why a program uses a certain port other than the conventions.</p>
+
+<p>Network Translation Layer (NAT) is a hack that uses port numbers to address different devices rather than different programs on the same device. Many devices connect to the same NAT router and the router forwards requests from different ports to different devices. For example, port 22 can be an SSH server on computer A behind NAT, and 80 is an HTTP server on computer B behind NAT, but to an outsider, it seems like the two servers run on the same computer. It essentially allows multiple devices to share the same IP address. Your home router does NAT automatically. You can manually tell the router which port should be associated to which port on which computer but it’s done automatically to make it not so complicated for normal people to use the Internet.</p>
+
+<p>One problem with NAT is that if you want to make a service persistently available, such as a website, you must control whatever router that controls NAT in order to tell it to always associate an outside port to the web server that you run (called port forwarding). This is not always possible. Sometimes your home router is the NAT router so you can easily do port forwarding but sometimes IPv4 addresses is so scarce that your internet service provider controls the NAT router and your home router shares the same IP address with several other homes such as my home in China.</p>
+
+<h2 id="nat-enables-networking-freedom">NAT Enables Networking Freedom</h2>
+
+<p>Recently I’ve been not very happy with the WiFi quality and switching speed of the router provided by my internet service so I brought a router myself to fix this problem. Connecting it to the network is trivial. I just had to run a cable from the ISP router to my router and set my router to treat the connection to the router as the internet connection. The router automatically acts as a NAT router among other things. To my ISP-provided router, it just appears as one device even though there are multiple devices connected to my WiFi.</p>
+
+<p>Getting IPv6 to work was a lot more complicated because I couldn’t figure out how to get the ISP router to allocate a block of IPv6 addresses from its pool to my router. I asked my roommate how he got his router to work (he has his own router) with IPv6 he told me that he just uses NAT for IPv6 (NAT66). Unfortunately, I didn’t figure out how to enable NAT66 on my router so I just gave up eventually. This made me realize one major advantage of NAT that I hadn’t thought about previously.</p>
+
+<p>It allows you to connect a lot of devices to the same network even if whatever internet connection you get only allows you to connect one device. For example, you can make a cellular connection your main internet connection through NAT because the network carrier thinks all the devices in your home are only one device. Or if you buy internet on a plane that only allows for one device to connect at a time so they can sell you more connections, you can get all your devices online by using a router. In both cases, the internet service provider has no way of knowing exactly the number of devices connected to the network. Therefore they cannot implement price discrimination. If they know how many devices you have they can start charging a premium on top of the network traffic you incur just like how Apple charge disproportionately for RAM and storage.</p>
+
+<h2 id="disappearance-of-nat-can-be-bad-for-you">Disappearance of NAT Can be Bad for You</h2>
+
+<p>Everything works with NAT not because NAT is functionally indistinguishable from not having NAT. Even if you don’t have websites to run, your day can also be ruined if no companies design their online products with NAT in mind. For example, push notification currently works (roughly) by having your device poll a server periodically because of NAT. You can control your smart IoT devices outside your home also because there is a central server that your mobile phone sends commands to and your smart home devices get commands from. Without NAT and with every device globally routable in IPv6, your device might decide to just have a process listening on a port to receive push notifications and commands. This means devices behind NAT will essentially have parts of their functionality broken.</p>
+
+<p>The lack of need for NAT will mean programs and devices will not be designed to function with NAT and gradually spell the death of it. This means your ISP will be able to know and control the number of devices connected to its network. This will most likely lead to them implementing price discrimination. For example, they can charge you more if you have more IoT devices because that implies you have a bigger house and thus can afford a higher price, even though the devices don’t take up any bandwidth. Your cellular company can stop you from using mobile hotspot or ask you to pay more for the functionality.</p>
+
+<p>Sure, there are ways to work around this problem such as using a VPN but all of these leave detectable traces so it will be detected and guarded against. It will be like using an ad blocker or the Tor network nowadays. It is perfectly possible but companies will try to detect it and ban it. Media can also create a narrative that the people who use these technologies are hackers or pirates.</p>
+
+<p>Thankfully, this is not the reality now. Anyone who has an internet connection can use it in whatever ways they want, including connecting an arbitrary number of devices, using their own router instead of the ISP-provided one, while giving the ISP limited information about individual devices. I hope it will stay the same even without NAT for IPv6.</p>
+
+  </div><a class="u-url" href="/2023/11/12/nat-good.html" hidden></a>
+</article>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Deyao Chen</li><li><a class="u-email" href="mailto:chendeyao000@gmail.com">chendeyao000@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/de0ch"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">de0ch</span></a></li><li><a href="https://instagram.com/deyaochen"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">deyaochen</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I am just another person trying to do something useful for the world. I write mostly about math and programming, occasionally about some other randoms thoughts I have.
+</p><p><a href="https://github.com/de0ch/de0ch.github.io">Source Code on Github</a></p></div>
+    </div>
+
+  </div>
+
+</footer>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>          
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+  </body>
+  
+  </html>
+  

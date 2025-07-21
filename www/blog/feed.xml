@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2023-12-22T17:11:38+00:00</updated><id>/feed.xml</id><title type="html">Deyao’s Blog</title><subtitle>Thoughts on math, programming and stuff</subtitle><author><name>Deyao Chen</name></author><entry><title type="html">NAT Is Good, I hope it still exists for IPv6</title><link href="/2023/11/12/nat-good.html" rel="alternate" type="text/html" title="NAT Is Good, I hope it still exists for IPv6" /><published>2023-11-12T00:00:00+00:00</published><updated>2023-11-12T00:00:00+00:00</updated><id>/2023/11/12/nat-good</id><content type="html" xml:base="/2023/11/12/nat-good.html"><![CDATA[<p>I used to hate Network Translation Layer (NAT) because it made hosting anything so much more complicated. It also makes devices waste a lot of power because they have to constantly poll a server to receive push notifications. IPv6 is supposed to address this problem so decided to experiment with it. Although the experiment failed (I still mostly use IPv4), I began to see several huge advantages of NAT.</p>
+
+<h2 id="briefly-how-nat-works">Briefly, How NAT Works</h2>
+
+<p>IP addresses are like physical addresses: they tell the network routers between two devices where to send data. Theoretically, each device should have its own IP address so it can be unambiguously addressed. Because of the limited number of IPv4 addresses, it’s physically impossible to give every device its own IP address. Thankfully, most of the internet works on TCP or UDP which uses port numbers to address intended to address different programs running on the same computer. For example, an SSH server might listen on port 22 while an HTTP server might listen on port 80. There’s no reason why a program uses a certain port other than the conventions.</p>
+
+<p>Network Translation Layer (NAT) is a hack that uses port numbers to address different devices rather than different programs on the same device. Many devices connect to the same NAT router and the router forwards requests from different ports to different devices. For example, port 22 can be an SSH server on computer A behind NAT, and 80 is an HTTP server on computer B behind NAT, but to an outsider, it seems like the two servers run on the same computer. It essentially allows multiple devices to share the same IP address. Your home router does NAT automatically. You can manually tell the router which port should be associated to which port on which computer but it’s done automatically to make it not so complicated for normal people to use the Internet.</p>
+
+<p>One problem with NAT is that if you want to make a service persistently available, such as a website, you must control whatever router that controls NAT in order to tell it to always associate an outside port to the web server that you run (called port forwarding). This is not always possible. Sometimes your home router is the NAT router so you can easily do port forwarding but sometimes IPv4 addresses is so scarce that your internet service provider controls the NAT router and your home router shares the same IP address with several other homes such as my home in China.</p>
+
+<h2 id="nat-enables-networking-freedom">NAT Enables Networking Freedom</h2>
+
+<p>Recently I’ve been not very happy with the WiFi quality and switching speed of the router provided by my internet service so I brought a router myself to fix this problem. Connecting it to the network is trivial. I just had to run a cable from the ISP router to my router and set my router to treat the connection to the router as the internet connection. The router automatically acts as a NAT router among other things. To my ISP-provided router, it just appears as one device even though there are multiple devices connected to my WiFi.</p>
+
+<p>Getting IPv6 to work was a lot more complicated because I couldn’t figure out how to get the ISP router to allocate a block of IPv6 addresses from its pool to my router. I asked my roommate how he got his router to work (he has his own router) with IPv6 he told me that he just uses NAT for IPv6 (NAT66). Unfortunately, I didn’t figure out how to enable NAT66 on my router so I just gave up eventually. This made me realize one major advantage of NAT that I hadn’t thought about previously.</p>
+
+<p>It allows you to connect a lot of devices to the same network even if whatever internet connection you get only allows you to connect one device. For example, you can make a cellular connection your main internet connection through NAT because the network carrier thinks all the devices in your home are only one device. Or if you buy internet on a plane that only allows for one device to connect at a time so they can sell you more connections, you can get all your devices online by using a router. In both cases, the internet service provider has no way of knowing exactly the number of devices connected to the network. Therefore they cannot implement price discrimination. If they know how many devices you have they can start charging a premium on top of the network traffic you incur just like how Apple charge disproportionately for RAM and storage.</p>
+
+<h2 id="disappearance-of-nat-can-be-bad-for-you">Disappearance of NAT Can be Bad for You</h2>
+
+<p>Everything works with NAT not because NAT is functionally indistinguishable from not having NAT. Even if you don’t have websites to run, your day can also be ruined if no companies design their online products with NAT in mind. For example, push notification currently works (roughly) by having your device poll a server periodically because of NAT. You can control your smart IoT devices outside your home also because there is a central server that your mobile phone sends commands to and your smart home devices get commands from. Without NAT and with every device globally routable in IPv6, your device might decide to just have a process listening on a port to receive push notifications and commands. This means devices behind NAT will essentially have parts of their functionality broken.</p>
+
+<p>The lack of need for NAT will mean programs and devices will not be designed to function with NAT and gradually spell the death of it. This means your ISP will be able to know and control the number of devices connected to its network. This will most likely lead to them implementing price discrimination. For example, they can charge you more if you have more IoT devices because that implies you have a bigger house and thus can afford a higher price, even though the devices don’t take up any bandwidth. Your cellular company can stop you from using mobile hotspot or ask you to pay more for the functionality.</p>
+
+<p>Sure, there are ways to work around this problem such as using a VPN but all of these leave detectable traces so it will be detected and guarded against. It will be like using an ad blocker or the Tor network nowadays. It is perfectly possible but companies will try to detect it and ban it. Media can also create a narrative that the people who use these technologies are hackers or pirates.</p>
+
+<p>Thankfully, this is not the reality now. Anyone who has an internet connection can use it in whatever ways they want, including connecting an arbitrary number of devices, using their own router instead of the ISP-provided one, while giving the ISP limited information about individual devices. I hope it will stay the same even without NAT for IPv6.</p>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[I used to hate Network Translation Layer (NAT) because it made hosting anything so much more complicated. It also makes devices waste a lot of power because they have to constantly poll a server to receive push notifications. IPv6 is supposed to address this problem so decided to experiment with it. Although the experiment failed (I still mostly use IPv4), I began to see several huge advantages of NAT.]]></summary></entry><entry><title type="html">Why I Use Windows on Desktop Rather than Linux</title><link href="/2023/10/29/linux-desktop.html" rel="alternate" type="text/html" title="Why I Use Windows on Desktop Rather than Linux" /><published>2023-10-29T00:00:00+00:00</published><updated>2023-10-29T00:00:00+00:00</updated><id>/2023/10/29/linux-desktop</id><content type="html" xml:base="/2023/10/29/linux-desktop.html"><![CDATA[<p>I love using Linux on servers. I run web servers, write code, and do experiments with interesting projects using Linux (specifically Debian and Ubuntu). This blog post explains why I don’t use Linux on desktop.</p>
+
+<p>I am sorry. I really love Linux and open-source software, but realistically it never worked very well for me. I think this is partially due to the small user base that Linux has and partially due to design choices like the lack of backward compatibility, and the lack of “bloatware”.</p>
+
+<p>I had experimented with using Linux on Desktop for a while. I tried various distros like Ubuntu, Fedora, and Manjaro. I even built an Arch with i3, Rofi, and Polybar (I use Arch btw). Most of the time, installing and getting apps to work takes a long time, especially if I am learning about it for the first time.</p>
+
+<h1 id="backward-compatibility-is-bad-on-linux">Backward Compatibility is Bad on Linux</h1>
+
+<p>Many open-source projects value new features and optimization and the “right” way to write code more than maintaining backward compatibility, which often means maintaining a bad design. As I programmer, I too hate having hacky workaround and messy code lying in the code base. However, as a user, I don’t care. I just want my app to work even if the program runs a little slower or takes a bit more RAM and storage space.</p>
+
+<p>One example of broken backward compatibility is glibc dropping support for DT_HASH in favor of the better-implemented DT_GNU_HASH because the developers of glibc (rightly) think that everyone should be using DT_GNU_HASH. But this broke software like Easy Anti-Cheat which relied on DT_HASH. Granted, fixing many of the breaking changes is extremely trivial, such as renaming a variable, pointing a path somewhere else, or even just recompiling the code to use the new ABI. However, as a developer, it is only trivial if you know what the root cause is, such as the line of code is causing the problem. Finding the problem takes time because usually, the place where the software fails is not where the problem occurs. One needs to spend a lot of time narrowing down the issue. Adding insult to injury, the debugging process is made difficult because all the search results are outdated. Fixing issues is even more difficult as a user of a program because I don’t have access to the source code or the experience to know exactly how to look for the bug.</p>
+
+<p>There are workarounds to these breaking changes. One such project that tires to make programs break less often is Flatpak. Flatpak uses container technology essentially to allow apps to version lock their dependencies and manage multiple versions of the same runtime library on a system.</p>
+
+<p>Contrary to Linux, Microsoft really prioritizes backward compatibility. One example of this is the Excel “bug” that thinks that 1900 was a leap year. This bug was introduced in Lotus 1-2-3 and Microsoft copied the behavior to ensure compatibility with Lotus 1-2-3. This “bug” was never fixed and is even included in the formal specification of Excel to ensure that spreadsheets that used to work continue to work even though the behavior is not correct. There are more examples of Microsoft trying to maintain backward compatibility at the cost of correctness and ease of use for new developers. win32 ABI is still maintained to this day with its numerous flaws and idiosyncrasies. Developer Arek Hiler even wrote a blog post titled “Win32 Is The Only Stable ABI on Linux”. UTF-8 character encoding is still not the default and is marked as beta because some programs still use non-UTF-8 encoding for non-English characters such as a Chinese stock trading app called Zhao Shang Zheng Quan. A new version of Powershell uses a different folder for the profile path to avoid conflict and maintain backward compatibility with the old version.</p>
+
+<p>Microsoft’s obsession with backward compatibility even extends to UI elements. I used to laugh at Windows for still having two settings pages – one called Settings introduced in Windows 10 and the other called Control Panel introduced in Windows 7. The two pages share a lot of the same functions but have different UI layouts. So the inconsistency makes the OS look very ugly. I used to wish for a complete overhaul and unification, but now I understand and appreciate the reasons for choosing to include both programs. I can still change my settings in the same way as I did 10 years ago. Every guide, even ones designed for Windows 7, still works. Even though I haven’t tried, I suspect hacky scripts written that interact with the computer based on graphical UI elements and mouse clicks would more or less still work with minimum changes.</p>
+
+<h1 id="lack-of-bloatware-makes-installing-software-difficult">Lack of Bloatware Makes Installing Software Difficult</h1>
+
+<p>Backward compatibility is similar to how the lack of “bloatware” contributes to a complicated user experience on many Linux distributions. Many packages on Linux ship with the bare minimum to give the user fine control of the features they want to include to reduce “bloat”. For example, when I install xorg-server, which is a program that basically coordinates GUI applications and their windows to be displayed on the screen, on Arch, it doesn’t come with xinit, which is a used to start xorg-server. The reason behind this is that xorg-server and xinit and independent programs. There are many other ways to start xorg-server that do not use xinit. I appreciate this modular approach, but I think most people would want xinit with xorg-server. It took me quite a while, especially as I was installing xorg for the first time, to realise xinit was missing. I was trying to figure out if I installed xorg-server wrong or if my PATH variable was messed up. When something doesn’t work, it always takes time to narrow down the cause and fix it even if it is just one simple install. I would have rather spent the extra bandwidth and disk space to install packages I didn’t need than having to waste a lot of time hunting down the exact missing package. Also, many distributions don’t even come with fonts for other languages like Chinese. It takes a while to find out what the exact Chinese font package is called and how to install it, especially for the first time. The lack of bloat makes the system use minimal RAM and storage. When there is nothing running, my Windows installation on my desktop takes a whopping 10GB whereas my Linux installation only uses a modest 2GB. But I think this is a price worth paying to have a simplified user experience.</p>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[I love using Linux on servers. I run web servers, write code, and do experiments with interesting projects using Linux (specifically Debian and Ubuntu). This blog post explains why I don’t use Linux on desktop.]]></summary></entry><entry><title type="html">Sunk Cost Fallacy and My Struggle with It</title><link href="/2023/10/15/sunk-cost.html" rel="alternate" type="text/html" title="Sunk Cost Fallacy and My Struggle with It" /><published>2023-10-15T00:00:00+00:00</published><updated>2023-10-15T00:00:00+00:00</updated><id>/2023/10/15/sunk-cost</id><content type="html" xml:base="/2023/10/15/sunk-cost.html"><![CDATA[<p>I went to have a driving test a few days ago and I failed because of one simple mistake — moving off without giving way. I was quite devastated because I had spent 40 hours plus thousands of pounds taking driving lessons. Rationally, that is just the sunk cost and should be ignored but I still feel very upset and even lost sleep because of it. That made me reflect on why I experienced this.</p>
+
+<h2 id="sunk-cost-should-be-ignored">Sunk Cost Should be Ignored</h2>
+
+<p>A good way to see if some cost is sunk is to consider the alternative. If I had passed the driving exam, I would have also already spent the time and money for it, so either way this is a cost that is spent regardless, so it is a sunk cost and should be ignored.</p>
+
+<p>With that in mind, let’s consider this the right way. In general, when making a decision, only the difference in cost and benefit between two choices should be considered. Since sunk cost exists for any choice you make, it should be disregarded. Currently, I have two choices, to continue trying to get a driver’s license or not. The difference in cost is the 15 hours of lessons my instructor asks for, and the difference in benefit is whether or not I get a driver’s license.</p>
+
+<p>Does the benefit outweigh the cost? No. The answer seems very clear. It is not worth it because I don’t have much of an opportunity to drive now. I live close to the lecture halls and biking is sufficient. Also, I would be better off spending the time catching up on some coursework in order to get a higher grade than getting a driver’s license. So the decision is made. Time to move on. Right?</p>
+
+<p>Not quite. I struggled to move on because I thought that I had spent so much time and money practicing driving and studying for the theory test for essentially absolutely nothing in the end. If I had just continued learning and eventually passed the test, the time and money would not have been wasted. Even though I kept reminding myself the time and money already spent is a sunk cost and should not be considered in any circumstances, something about wasting time and money for nothing is so deeply upsetting that I could not just let the thought go.</p>
+
+<h2 id="why-sunk-cost-fallacy">Why Sunk Cost Fallacy</h2>
+
+<p>Disregarding sunk cost was the conclusion of logical and rational thought, but committing the fallacy seems to be an emotional response. So it got me thinking that considering sunk costs might have had an evolutionary advantage in the past.</p>
+
+<p>In a general sense, sunk cost does matter if the goal gets easier to achieve with more effort and if you give up halfway through you have to spend more effort the next time you try to achieve it. For example, if you are chasing a prey, the longer you have chased it, the easier it is for you to catch it because the prey gets more tired, compared to a well-rested prey that you might want to catch next time. The potential cost for continuing is lower than restarting after you give up on the same goal of getting food to survive. Crucially, the sunk cost is roughly the same as the difference in cost for the two alternative choices. We keep track of sunk cost as a proxy for the cost difference because actively comparing the cost and benefits of two alternatives takes significantly more brain power than keeping track of the sunk cost. That is why, I think, we evolved value sunk cost.</p>
+
+<p>As society evolves, the environment becomes vastly different. In many cases, the more effort we spend on something we struggle to achieve, the more future cost it involves. For example, the more you spend on a failing project, the more it serves to prove that either the project is more difficult or you are worse at it than you thought. For example, if you keep losing money on an investment, it means either the investment is bad or you suck at investment. The alternative, moving onto a completely new project, might incur less cost than continuing the same project for the same amount of profit you can make. In other words, the higher the sunk cost, the higher the future cost gets compared to the alternative of moving on to another project. The decision is usually very difficult because you not only have to overcome the sunk cost fallacy but also admit that you made a wrong decision in the first place. In my case, I have to admit that it was wrong to try to get a driver’s license in the first place as I underestimated the difficulty and overestimated its usefulness.</p>
+
+<h2 id="resolution">Resolution</h2>
+
+<p>Society changes way faster than humans can evolve. This is why we live with many unfortunate vestiges of evolutionary advantages, with the sunk costs fallacy being one of them. That’s why we have to make decisions carefully and if it helps, try to comfort your emotions by framing them in some other ways. For example, by thinking that I will get my driver;s license eventually after this short break now, I can feel a lot better about the decision.</p>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[I went to have a driving test a few days ago and I failed because of one simple mistake — moving off without giving way. I was quite devastated because I had spent 40 hours plus thousands of pounds taking driving lessons. Rationally, that is just the sunk cost and should be ignored but I still feel very upset and even lost sleep because of it. That made me reflect on why I experienced this.]]></summary></entry><entry><title type="html">To update or not to update, that is the question</title><link href="/2023/10/01/update-software.html" rel="alternate" type="text/html" title="To update or not to update, that is the question" /><published>2023-10-01T00:00:00+00:00</published><updated>2023-10-01T00:00:00+00:00</updated><id>/2023/10/01/update-software</id><content type="html" xml:base="/2023/10/01/update-software.html"><![CDATA[<p>Picking up a coding project that I haven’t touched for a year or two, I have come to expect that nothing about it still works and I need to update all of its components and my code to get it to work again. I didn’t realize how strange this was until I compared it to other things. If I leave a book unattended for many years, it won’t just fall apart for no reason and if I pick up my camera after a few years, it will still take pictures.</p>
+
+<p>So why is this not the same with software, why do we have to deal with constant updates that risk introducing new bugs into existing systems that work perfectly fine?</p>
+
+<h2 id="security-update">Security Update</h2>
+
+<p>The main culprit: security update. Because everything is connected to the internet all the time, your devices face constant threats. Your phone can get hacked just by reading a message because of stack overflow, sandbox escape, etc. There are bugs — logical errors — made by programmers that grant control to unauthorized parties. Compare this to things that are not connected to the internet: unless someone has physical access to something, they cannot control it. Because the laws of physics are written by God, there aren’t any bugs or exploits so things that don’t connect to the internet never need to be updated to fix security vulnerabilities.</p>
+
+<p>You might ask, I was fine with using the software before a fix was applied for so long, so why would I not be fine after the security fix is released? The answer: no one knew about the bug beforehand (or at least, few people knew), but after the fix is published, especially for open-source software, everyone knows about and can develop exploits for those unpatched systems so your risk of getting hacked increases after a security update is published.</p>
+
+<h2 id="new-incompatible-features">New Incompatible Features</h2>
+
+<p>Security updates explain why we need updates even if we don’t want them. Updates break existing features for a different reason. It’s because of the tradeoff between maintaining backward compatibility with old technology and the new features and quality of life improvement brought by new technology.</p>
+
+<p>In real life, we make this tradeoff all the time. We updated our method of communicating with someone from writing letters to writing text messages over the internet because the benefits are huge even though that means we need to learn new ways of communicating and adapt our lifestyle around it, but we didn’t update our keyboard layout to something more efficient because it’s difficult to learn a new keyboard layout for a small amount of gain in efficiency.</p>
+
+<p>The same tradeoff applies to the software world. While it is technically easy to maintain all the backward compatibility of a piece of software, this sometimes comes into conflict with new features. Usually, an update to break backward compatibility is made to fix problems with confusing design and introduce new features that are not allowed by the old design.</p>
+
+<p>Windows has a good reputation for maintaining backward compatibility. One example is the control panel. When Windows rewrote the settings page in Windows 8, it preserved the control panel introduced in Windows 7, and it is kept in Windows to this day, 14 years after Windows 7 was released. This confuses new users because there are two very different programs that do the same thing. It looks ugly because they use different themes. The advantage is clear though. I can still follow tutorials written years ago, even those written for Windows 7, and what I remember from my childhood still works.</p>
+
+<p>For other software, the thought process is the same, the specs of a programming language gets updated to fix confusing design that cause pitfalls to new and unfamiliar users or make it easier to maintain and develop programs. Depending on the popularity of the new version, developers decide if they should drop support for the older version. It took the developers of Python 10 years to drop support for the older version 2 of Python after the new version 3 came out. For Perl, version 5 was so popular that its successor version 6 was eventually renamed because of the incompatibility and people’s desire to keep using the old one despite its numerous pitfalls and stupid design choices.</p>
+
+<p>Maintaining backward compatibility is like not changing your room layout because if you change it, the robot cleaner gets confused the stops working even though the layout was proven to be not logical. Whether to change the layout depends on how important the robot is and how difficult it is to update it to make it work with the new layout as well as how much more logical the new layout is.</p>
+
+<p>When software gets updated, it becomes harder and harder to develop fixes for the older versions because the code bases diverge over time. When developers decide to drop support for an old version — usually meaning stopping applying new security fixes to it, users are usually forced to upgrade to the new version lest they leave their machines vulnerable to hacks. This is why programs constantly need updates and updates sometimes break things that already work.</p>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[Picking up a coding project that I haven’t touched for a year or two, I have come to expect that nothing about it still works and I need to update all of its components and my code to get it to work again. I didn’t realize how strange this was until I compared it to other things. If I leave a book unattended for many years, it won’t just fall apart for no reason and if I pick up my camera after a few years, it will still take pictures.]]></summary></entry><entry><title type="html">Cloud Computing is the Future (But not Game Streaming)</title><link href="/2023/09/18/cloud-computing.html" rel="alternate" type="text/html" title="Cloud Computing is the Future (But not Game Streaming)" /><published>2023-09-18T00:00:00+00:00</published><updated>2023-09-18T00:00:00+00:00</updated><id>/2023/09/18/cloud-computing</id><content type="html" xml:base="/2023/09/18/cloud-computing.html"><![CDATA[<p>No one nowadays buys a generator to generate electricity; rather, we buy it as a finished product from power plants delivered through the grid, but why is it that people still buy computers instead of buying the finished product, which is computing power delivered through the internet?</p>
+
+<p>In this blog post, I want to explore why it is not the case that we stream video games from the cloud or do many computations on the cloud. Why is it not that every device just essentially becomes a screen with wifi? What is still missing?</p>
+
+<h2 id="choice-of-intermediate-representation-is-important">Choice of Intermediate Representation is Important</h2>
+
+<p>If you ever tried cloud gaming, you might find that sometimes the latency and internet connection is so unstable that it makes the game unplayable. The straightforward solution is to make the network connection better. However, I would argue that the actual solution is more subtle than that. It has to do with choosing the right intermediate representation.</p>
+
+<p>An intermediate representation is the form in which data exists and awaits further processing. For the same piece of data or code, there are many ways to represent it, like different file formats or programming languages. Different ways of intermediate representation are suitable for different situations.</p>
+
+<p>The simplest example to illustrate what intermediate representation is is to imagine that you want to write a program that calculates the area of a sphere given the radius, for which you need to know the value of $\pi$. There are many representations of $\pi$ — decimal value, infinite series or continued fraction. Using infinite series will give you the same result eventually but will require a lot of computational power.</p>
+
+<p>In the case of cloud gaming, The Intermediate representation is the video signal, when browsing the web it is the HTML, CSS and JavaScript code. In the case of a downloaded desktop application, it is the machine instruction for your CPU to do computation.</p>
+
+<p>The intermediate representations for desktop and web pages are vastly different. A desktop app should aim to be self-sufficient so it should download all the required parts in one go. These apps often need a rendering engine that knows, among other things, how to draw a circle and has instructions to handle networking, whereas a web app needs to be loaded quickly at first so browsers use HTML, CSS and JavaScript as intermediate representations. These types of code don’t contain specific instructions for how to render elements or do network requests but rather the shape of elements themselves or the link to a web page. Then the browser calls on its own code to handle the lower-level functions that many web pages share.</p>
+
+<p>Regardless of the intermediate representation, the end result that a person sees is the same — coloured lights on a screen. However, the choice matters for the most efficient computation. It is a tradeoff between computational power, network bandwidth, and storage space. Desktop apps do not need the internet but it is slow to download, web app does not need to be downloaded in advance but requires a good internet connection and cloud gaming do not require any computational power but needs really reliable internet connections.</p>
+
+<p>Many apps have different intermediate representations for different situations. Take WhatsApp as an example, it exists as a mobile app that requires an initial lengthy download but is fast to start up and can work offline. It also exists as a web page that doesn’t require download but cannot work offline. If you so desire, you can also run WhatsApp on a cloud computer like Windows 365 and stream the video back to you. The first two options make sense; the last one doesn’t.</p>
+
+<p>Just like any design choices, there are objectively bad intermediate representations that are not used at all. For example, represents $\pi$ as an infinite series in code instead of its decimal value. In the real world, it is objectively bad to distribute a program as source code to the end user, as source code is used as an intermediate representation that facilitates reading and writing the program but not for running it. So most of the time, developers just compile the source code into machine code which runs faster and is smaller in size before distributing it.</p>
+
+<p>Designing and implementing good intermediate representations is no easy task. The web took a few decades to get to the point it is now and writing a browser, which essentially transforms one intermediate representation to another — text to pixels on a screen — is so difficult that there are essentially only three browser engines in the world, Chrome, Firefox and Safari, all backed by giant corporations. Even Microsoft tried and failed to write its own browser engine for its Edge browser and eventually gave up and used the engine for Chrome instead.</p>
+
+<h2 id="cloud-computing-for-text-is-well-designed">Cloud Computing for Text is Well Designed</h2>
+
+<p>In my experience, cloud computing for anything related to text is quite well designed. These include email servers and search engines.</p>
+
+<p>Text-based cloud computing also works for more complicated scenarios. Remote development using Visual Studio Code is a prime example of this. Instead of running code on your own computer, it lets a cloud computer do the work. While complex logic is offloaded to the remote machine, most of the user interface (UI) elements are computed in a browser and only the essential information like the texts in a file and command is sent to the remote server. All the other functions like rendering where the cursor is or the layout of the window are computed on device.</p>
+
+<p>If you use an extension that needs to run some code like autocompletion, it works by sending the text to the server and getting the possible choices back. After the choice is made, the file is first changed in the browser without waiting for the server to respond with a new version. It updates it with the new version when a response comes back from the server should it be different from the one displayed on the screen for whatever reason. This is called optimistic rendering in web design. This makes the code code editor seem very responsive even if the network is unstable. This also means adapting desktop applications to web applications requires special care because they are often written not with latency in mind nor considering separating background tasks and UI updates.</p>
+
+<p>In summary, when processing text in the cloud, only the text is sent back and forth, and the UI elements are rendered on device for responsiveness. That is, when you press a key, your device computes where the letter should go and what the shape of the letter is, as opposed to sending the raw keystroke to a remote server and having the remote server send back an image of the text. As obvious as this is, it is not how some of the badly designed cloud computing works, such as cloud gaming.</p>
+
+<h2 id="cloud-computing-for-video-is-thoughtless">Cloud Computing for Video is Thoughtless</h2>
+
+<p>We have mature intermediate representations for the web and desktop but the requirements for that for game streaming are vastly different. Not only does cloud computing require minimum computation on the client machine, fast initial load time, and responsiveness like the web, but it also needs to achieve the visual complexity of computationally expensive video games which is different from the mostly text-based content on the web.</p>
+
+<p>Currently, we just transmit the video from the cloud and send input commands from the device, but this does not create a good experience because if your internet doesn’t have a very low latency — the time it takes for a message from one computer to another — the game will not be playable. Unfortunately, the current internet infrastructure is built with mainly bandwidth — the amount of data transmitted in a period of time — in mind. Intermediate representations for web pages are not really sensitive to latency. One would probably not notice if a webpage takes half a second more to load. You are even less likely to notice if a software download starts half a second later, but you will definitely notice if your cursor movement lags your mouse movement by half a second — it makes it impossible for you to accurately aim your mouse.</p>
+
+<p>While it is sufficient to just build a better network infrastructure that lowers the latency, it is not necessary. This is better solved by designing better intermediate representations. Solving it by reducing the latency is like making the web work by making the bandwidth so high that we can just download an entire desktop application a web page instead of designing lightweight HTML, CSS and JavaScript that are much more suitable.</p>
+
+<p>I have a few thoughts on how an intermediate representation can be designed. Although I have never written a graphics engine, I believe that there should be some intermediate representations that are more easily adapted to different inputs. We can view computing graphics as essentially a really complicated function with the camera position and angle and the environment of the game as input and the colour and brightness of pixels as output. Instead of having the remote server do all the calculations and the client having no idea how to change the output in response to changes in input, we can have the remote server compute an approximate and easy-to-calculate function that is accurate around the current input and is enough to fill in the gap when the client computer is waiting for the next frame.</p>
+
+<p>Creating new intermediate representations is really difficult work. Not only do you need a lot of theoretical knowledge to prove that it works well for all situations and is efficient but you also need a lot of effort writing the tooling around the new standard, fixing bugs and bad design along the way. After the tooling becomes mature and stable, you still need to port current programs or design new programs with this in mind. All of these take a lot of time and effort so for now we just use the most simple method which is to transmit video frame by frame. This is why cloud computing is quite bad in its current form and why I think it will get much better over time.</p>
+
+<p>Cloud computing doesn’t work well now because it is still not well-developed or well-designed. The current form is not very efficient. It will become better over time and will soon become as ubiquitous as the web today, so ubiquitous and natural that buying computers will be as niche as it is to buy an electric generator today.</p>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[No one nowadays buys a generator to generate electricity; rather, we buy it as a finished product from power plants delivered through the grid, but why is it that people still buy computers instead of buying the finished product, which is computing power delivered through the internet?]]></summary></entry><entry><title type="html">Why Decentralised Web Fails</title><link href="/2023/09/03/decentralized-fail.html" rel="alternate" type="text/html" title="Why Decentralised Web Fails" /><published>2023-09-03T00:00:00+00:00</published><updated>2023-09-03T00:00:00+00:00</updated><id>/2023/09/03/decentralized-fail</id><content type="html" xml:base="/2023/09/03/decentralized-fail.html"><![CDATA[<p>Recently, or rather a few years ago, there has been quite some buzz with web 3.0 powered by blockchain. To me, this is complete nonsense. Technology before blockchain is more than enough to enable a decentralized web. Decentralization did not happen rather because it is inefficient and therefore outcompeted by centralization.</p>
+
+<p>Blockchain, on the other hand, solves a completely different problem that has little to do with decentralization. So allow me to first go on this tangent to explain why blockchain is irrelevant.</p>
+
+<h2 id="trusted-timestamp-the-only-problem-that-blockchain-solves">Trusted Timestamp: the Only Problem That Blockchain Solves</h2>
+
+<p>When we think of blockchain technology, we often associate it with a transparent ledger, an immutable database, and a collaborative environment. But this is not thanks to blockchain, it is rather thanks to other technologies like peer-to-peer networks and cryptography. You can verify if a message is sent from someone by verifying the digital signature and you can send messages across the internet without a central server by using peer-to-peer network protocols, barring some technical limitations like the limited address space of IPv4. The only feature of blockchain is the trusted generation of a timestamp of an event.</p>
+
+<p>Knowing the time something happens is often critical. For example, if someone spends more money than they have, we should invalidate any payment that happens after they deplete their account. This is traditionally done with a trusted third party, like a bank. Without blockchain and a trusted third party, this is impossible to achieve. After all, anyone can lie about when something happens. There’s no way for any reader of the message to verify if the claimed timestamp is accurate because they could be offline for a while and therefore receive updates out of sync with the actual time they are being sent. Blockchain solves this problem by having everyone vote using their computational power whether they think that an event indeed happens at the time the timestamp claims, or more technically, they vote for the event that claims to happen after the most credible course of history.</p>
+
+<p>Knowing the actual time something happens is important for many applications like trading but for many other things, it is not really important. For example, it’s less important to know when I have published this blog post than that I published this at all and you can read it in its original form untempered thanks to cryptography. It is also not important to know when a file like a TikTok video is created for you to enjoy it.</p>
+
+<h2 id="technology-today-is-sufficient-for-decentralised-web">Technology Today Is Sufficient for Decentralised Web</h2>
+
+<p>Today, you can start hosting a website for close to $0 per month. I host this blog on GitHub pages which costs me nothing and I am able to control the appearance and content of the website. For more complicated apps that, for example, need a database, some platforms do that for free or for a small fee (Heroku used to be a good and free option, although they no longer offer the free plan). If nothing fits your needs, you can always just rent a low-cost computer on Amazon Web Services for a few dollars a month that can do anything. You can also reuse your current computer and internet connection at home to host any website for free. The only technical limitation currently is that one must host a server from a computer that has a public IP, which excludes most mobile and some residential internet connections, but the problem is easily also solved by a reverse proxy/tunnel like playit.gg or ngrok which costs a few dollars a month.</p>
+
+<p>For anyone unfamiliar with coding, there are plenty of open-source tools that streamline the process. The decentralised social media platform Mastodon has guides for setting up your own server to serve content.</p>
+
+<p>Ultimately, it is not that expensive or difficult to start hosting your own website, your own social media platform, or your own anything. The only limit is your skills and imagination.</p>
+
+<h2 id="decentralization-is-inefficient">Decentralization Is Inefficient</h2>
+
+<p>So why isn’t the web sprawling with self-hosted services and websites? This might be because they get outcompeted by bigger and more centralized businesses. Bigger businesses are inherently more efficient and are even more so for tech-related companies. Software has near zero marginal cost and high fixed costs. Therefore a bigger company that has more resources to develop better features can easily out-compete smaller ones. Also, because the marginal cost is zero and most fixed costs like engineering time already spent are sunk costs that should not be considered, competition drives down the unit price to near zero. As a result, the better product developed by big companies easily outcompetes the decentralised ones developed by dedicated communities by either having a better product or better marketing strategy. This is, I believe, more beneficial for consumers as we get better products by paying the same price regardless – near zero. This is also a better allocation of resources because instead of spreading a society’s engineering time to numerous competing products, it is spent on making a few products much better.</p>
+
+<p>Surely, you may say, cooperations should let users host the server programs on their own devices rather than on centralised servers since it costs them nothing either way. But why should they? Centralised servers are far more reliable, and create a better user experience as users don’t need to download a lot of data and code used by servers and it is cheaper to develop and optimise because the target hardware platform is known with few variations. It also makes the software less likely to get stolen. So we will probably never see popular centralized services implemented in a decentralised way.</p>
+
+<h2 id="decentralised-web-ends-up-being-used-for-illegal-stuff">Decentralised Web Ends up Being Used for Illegal Stuff</h2>
+
+<p>Decentralised web gets easily outcompeted for anything legal so it sometimes unfortunately ends up being used for illegal purposes.</p>
+
+<p>Take the BitTorrent protocol as an example. The protocol allows users to do peer-to-peer file transfer without a central storage server. This has the benefit that anyone can put files into the system without paying for any storage and internet costs, and that files in the system can not be censored by authority. It can also download files much faster than centrally hosted files because one can get the file from the closest computer that also runs BitTorrent, which can be much closer, especially for smaller businesses that cannot afford to host many data centres around the world. This technology was invented in 2001. Today, it is often used for pirating software and movies without mainstream adoption. The biggest reason, I believe, is that there is no mainstream support for this protocol. It is not built into any browser like http or ftp: you cannot just click on a link and start downloading straight away. You have to install a dedicated BitTorrent client. Apple explicitly bans any app capable of downloading torrent files.</p>
+
+<p>This is pure speculation, but I believe the reason BitTorrent is not built into most browsers is because it can really hurt their business. After all, who will spend $10 for a movie on YouTube when they can just click on a link on The Pirate Bay and start watching the same thing in the same definition with no ad? I think similar things will also happen to any other decentralised technologies that stop them from getting mainstream adoption.</p>
+
+<p>Cryptocurrencies, especially privacy-focused ones like Monero are mostly used by criminals because of their intractability. According to CNBC, in the first half of 2018, Monero was used in 44% of cryptocurrency ransomware attacks<sup id="fnref:monero-source" role="doc-noteref"><a href="#fn:monero-source" class="footnote" rel="footnote">1</a></sup>.</p>
+
+<h2 id="optimism-or-stockholm-syndrome">Optimism or Stockholm Syndrome?</h2>
+
+<p>Although a decentralised web sounds like a utopia: no evil corporation controls the flow of information or spread propaganda, a centralised web is not necessarily a bad thing. In fact, it is good because a centralised web and by extension, centralised expertise, can create better products that are easy to use and boost innovation than a decentralised web. But at the end of the day, I’ve not seen a decentralised web fully implemented so I have no direct comparison, so this might be just Stockholm Syndrome.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:monero-source" role="doc-endnote">
+      <p>Source: <a href="https://www.cnbc.com/2018/06/07/1-point-1b-in-cryptocurrency-was-stolen-this-year-and-it-was-easy-to-do.html">https://www.cnbc.com/2018/06/07/1-point-1b-in-cryptocurrency-was-stolen-this-year-and-it-was-easy-to-do.html</a> <a href="#fnref:monero-source" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[Recently, or rather a few years ago, there has been quite some buzz with web 3.0 powered by blockchain. To me, this is complete nonsense. Technology before blockchain is more than enough to enable a decentralized web. Decentralization did not happen rather because it is inefficient and therefore outcompeted by centralization.]]></summary></entry><entry><title type="html">Launching of Bi-Weekly Blog Posts</title><link href="/2023/08/20/bi-weekly-blog-posts.html" rel="alternate" type="text/html" title="Launching of Bi-Weekly Blog Posts" /><published>2023-08-20T00:00:00+00:00</published><updated>2023-08-20T00:00:00+00:00</updated><id>/2023/08/20/bi-weekly-blog-posts</id><content type="html" xml:base="/2023/08/20/bi-weekly-blog-posts.html"><![CDATA[<p>I wanted to start writing a blog post every two weeks for a long time but I kept delaying it. Recent events with the YouTube channel Linus Tech Tips pushed me to finally publish this blog post.</p>
+
+<h1 id="the-unfortunate-first-draft">The Unfortunate First Draft</h1>
+
+<p>The opening of the blog post would have been:</p>
+
+<p>I was watching Linus Tech Tips, a massively successful and my favourite tech YouTube channel. Linus said something that quite inspired me (paraphrased since I can’t find the original clip).</p>
+
+<blockquote>
+  <p>If we have something not perfect, we’ll just think we’ll just do better next time. In my opinion, shipping is always better than perfection.</p>
+</blockquote>
+
+<p>This consistency is probably what enabled him to become as successful as he is now in the tech community from his humble background. He had not had any viral success that suddenly brings him to the top, but all of his videos are consistently good despite not being perfect. He managed to be very consistent with his release schedule and never missed his daily upload in a decade. I think this is what brings him to the top and I am very inspired by his work ethics.</p>
+
+<h1 id="the-revised-draft">The Revised Draft</h1>
+
+<p>I am not inspired anymore as Linus is recently being accused heavily of having a lot of errors in his videos to meet the daily upload schedule. There are also other allegations of horrible workspace conditions contributed in part by the strict publishing schedule. Therefore I was rethinking if I publish on time for the sake of publishing on time is a good thing anymore.</p>
+
+<p>But just now as I was scrolling Reddit to spectate the absolute dumpster fire that is Linus’s situation, I came across CGP Grey’s video explaining his production process for a factual error in one of his videos. He speaks of needing to know when to stop digging, start writing and eventually bring an end to a project to move on to new projects. He also recalls his father telling him,</p>
+
+<blockquote>
+  <p>The cost of perfection is infinite.</p>
+</blockquote>
+
+<p>This reminds of the aphorism,</p>
+
+<blockquote>
+  <p>Perfection is the enemy of good.</p>
+</blockquote>
+
+<p>Here is another YouTuber who speaks of the importance of giving up perfection for good and his video quality didn’t suffer like it does with Linus. So I realised Linus’s problems are probably caused, or contributed in large part by other problems.</p>
+
+<h1 id="lessons-learnt">Lessons Learnt</h1>
+
+<p>So I realised this incident shouldn’t invalidate all claims in this post and the lessons I have learnt. I still believe that putting quantity over quality is a good thing.</p>
+
+<p>This point is also supported anecdotally by a social experiment done by Jerry Uelsmann, a professor at the University of Florida. He divided his film photography students into two groups. He told the first group that their photos would be graded on the quality of a single photo, and he told the other group that their photos would be graded based on the quantity of the photos: one hundred photos would be graded A, ninety photos would be graded B and eighty photos would be C. At the end of the term, to his surprise, all the best photos were produced by the students who were graded on the quantity of their work. They were able to produce better quality work because they got more practice by taking action.</p>
+
+<p>The other day I encountered Raymond Chen’s blog post. To my utter astonishment, he has been writing one blog post every day for the last 20 years, amounting to 6800 posts in total. Some of them are of super high quality as well. If he could keep up with writing a post every day, I can certainly manage having one post every two weeks no matter how busy I am.</p>
+
+<h1 id="putting-ideas-into-practice">Putting Ideas into Practice</h1>
+
+<p>Therefore I will take action, instead of waiting for the perfect idea to write about, I will sit down every so often and write about a good idea. Good ideas will eventually become better as I write more.</p>
+
+<p>I realised I struggle a lot with creative tasks with no well-defined end and correct answer.  I just tend to go down various rabbit holes I come across. This approach works well in math problems and coding projects because when the problem is solved, the rabbit hole ends. But for complicated topics, the rabbit hole never ends, leaving me unsatisfied. The feeling of lack of completion is so debilitating that it often puts me off from even beginning writing or work on any creative project.</p>
+
+<p>I realised the solution, to speak in programming terms, is to change from depth-first search to breath-first search. This means not going down rabbit holes before the ground is explored completely. For example, instead of finishing one paragraph well and then moving on to the next, I should first finish a rough draft and then fill in the details. In addition, I will set a deadline for projects. This is a primary reason why I want to launch this bi-weekly blog post, as it would force me to put an end to exploring a topic that otherwise would never have a clear end. Through practice, I can learn the techniques of writing and finishing projects that don’t have well-defined ends and can’t be perfect. This commitment should keep me accountable and not delay blog posts one week after another to eventually not publishing anything for more than two years!</p>
+
+<p>The only problem now, which I totally could not have foreseen in absolutely any way, is that I just keep delaying making the first post. Luckily, recent events have put a hard deadline on this, as I want to publish this blog post before Linus publishes the results of the ongoing investigation for the current issue thus making me feel uncomfortable about publishing this again. So this is a very opportune time for me the take the first hard step.</p>
+
+<p>At this point, I don’t really know what the theme for my blog posts would be. Most likely it will be some things interesting I learned in the two weeks or thoughts I want to share. Occasionally,  I might spend more time writing something bigger. Ultimately, my goal is to simply write something that is worth the reader’s time. I hope you will enjoy this series.</p>
+
+<h1 id="commitment">Commitment</h1>
+
+<p>Today I make a promise to you and to myself that I will keep up with this series, no matter the success or readership for at least two years. If for whatever reason I no longer have the time to write, I shall write a post formally ending the series so it end not with a whimper but a bang.</p>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[I wanted to start writing a blog post every two weeks for a long time but I kept delaying it. Recent events with the YouTube channel Linus Tech Tips pushed me to finally publish this blog post.]]></summary></entry><entry><title type="html">How big is the universe? It’s so big that it’s bigger than itself. (Russell’s Paradox)</title><link href="/2021/08/14/russell-paradox.html" rel="alternate" type="text/html" title="How big is the universe? It’s so big that it’s bigger than itself. (Russell’s Paradox)" /><published>2021-08-14T00:00:00+00:00</published><updated>2021-08-14T00:00:00+00:00</updated><id>/2021/08/14/russell-paradox</id><content type="html" xml:base="/2021/08/14/russell-paradox.html"><![CDATA[<p>We investigate infinity with set theory, which deals with sets - collections of things, like the set of all natural numbers and the set of all polygons. Sets can contain anything (including sets) and can be however large. But even though a set can be easily larger than the entire physical (not just the observable) universe, there are sets that are too large to be a set. One of them is the set of everything (a.k.a. the universal set). Known as the Russell’s Paradox, the proof itself is as spectacular as the result: the attempt to create a foundation for math through set theory accidentally created a creature too large to be contained.</p>
+
+<h1 id="a-short-proof">A Short Proof</h1>
+
+<p>The original version of the proof is effective and succinct. It goes as follows.</p>
+
+<p>Let’s assume that the universal set exists. Now we construct a set $S$ such that it contains all sets that do not contain itself. Symbolically,</p>
+
+\[S = \{ x \in U: x \notin x \} \text{,}\]
+
+<p>where $U$ is the universal set.</p>
+
+<p>Now, does $S$ contain itself? If it does, by definition, it does not, and vise versa. Let that sink in.</p>
+
+<p>Although the argument is logically correct and sound, it’s a bit hard to understand and, in my opinion, does not capture the essence of the paradox – the universal set is too “big” to be a set, and self reference is not the culprit <sup id="fnref:ban-self-reference" role="doc-noteref"><a href="#fn:ban-self-reference" class="footnote" rel="footnote">1</a></sup>. Therefore, I would like to introduce an alternative (and equivalent) view of the proof, which is similar to Cantor’s diagonal argument. It’s a bit more involved and longer, but it gives you a much better grasp of what the universal set looks like and why exactly it doesn’t exist.</p>
+
+<h1 id="terminology-disambiguation">Terminology Disambiguation</h1>
+
+<p>Every entity/thing in our discussion is a set. This is because all mathematical structures – numbers, functions, shapes, spaces, etc. – can all be represented as sets. Only having sets in our discussion simplifies our structures <sup id="fnref:set-definition" role="doc-noteref"><a href="#fn:set-definition" class="footnote" rel="footnote">2</a></sup>. An “element” is also a set, but it puts emphasis on the fact that it is contained in another set. So you may find me referring to the same thing as both a “set” and an “element”. That is because a set is an element of another set.</p>
+
+<h1 id="a-small-universe">A Small Universe</h1>
+
+<p>Tackling the universal set directly can be quite daunting and disorientating because it’s infinite in size. So we will start with a smaller “universal” set. We will prove that the universal set contains more than 5 elements. (If you are familiar with Cantor’s diagonal argument, you may skip to the section “A Large Universe”.)</p>
+
+<p>No duh, you say. That so obvious that we don’t need a proof. But stick with me, if we meticulously examine the underlying logic for our intuition, we can apply the similar logic to a bigger case where intuition fails.</p>
+
+<p>Let’s say the only elements in our universe are 🍟, 🍕, 🥪, 🌮, 🥨. Since these are the only elements in the “universe”, it follows that any set contains a combination of the elements in the “universe”. For example,</p>
+
+<ul>
+  <li>🍟 = {🍕}</li>
+  <li>🍕 = {}</li>
+  <li>🥪 = {🥪, 🌮}</li>
+  <li>🌮 = {🍟, 🍕, 🥪, 🥨}</li>
+  <li>🥨 = {🍟, 🍕}</li>
+</ul>
+
+<p>Alternatively, we can write it in a table form in the following way, which is useful for finding a set that is not the universe.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+    </tr>
+    <tr>
+        <th>🍟</th>
+        <td>🅾️</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+    </tr>
+    <tr>
+        <th>🍕</th>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+    </tr>
+    <tr>
+        <th>🥪</th>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🅾️</td>
+    </tr>
+    <tr>
+        <th>🌮</th>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>✅</td>
+    </tr>
+    <tr>
+        <th>🥨</th>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+    </tr>
+</table>
+
+<p>The rows of the table denote what the sets contain. ✅ means that the set in the row contains the element in the column, and 🅾️ means that it does not.</p>
+
+<p>For example, let’s take a look at the third row</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+    </tr>
+    <tr>
+        <th>...</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥪</th>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🅾️</td>
+    </tr>
+    <tr>
+        <th>...</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<p>It means that the set 🥪</p>
+<ul>
+  <li>does not contain 🍟</li>
+  <li>does not contain 🍕</li>
+  <li>contains 🥪</li>
+  <li>contains 🌮</li>
+  <li>does not contain 🥨</li>
+</ul>
+
+<p>You might notice that there are a lot of combinations of the five sets that are not in the universe. For example, the set {🍕, 🌮} is not in the “universal” set. Right now, we can just think of such a set by looking at it, but as the universe gets larger, we need a systematic way finding a set that is not in the universe.</p>
+
+<p>For finding a new set that is not in the universe, we use a technique called diagonalization.</p>
+
+<p>First, we choose the elements on the diagonal row.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+    </tr>
+    <tr>
+        <th>🍟</th>
+        <td>🅾️</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🍕</th>
+        <td></td>
+        <td>🅾️</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥪</th>
+        <td></td>
+        <td></td>
+        <td>✅</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🌮</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>🅾️</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥨</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>🅾️</td>
+    </tr>
+</table>
+
+<p>And then we flip whether it is an element of its set.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+    </tr>
+    <tr>
+        <th>🍟</th>
+        <td>✅</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🍕</th>
+        <td></td>
+        <td>✅</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥪</th>
+        <td></td>
+        <td></td>
+        <td>🅾️</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🌮</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✅</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥨</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✅</td>
+    </tr>
+</table>
+
+<p>Based on the diagonal states, we make a new element.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+    </tr>
+    <tr>
+        <th>?</th>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>✅</td>
+        <td>✅</td>
+    </tr>
+</table>
+
+<p>This is not an element of the “universal” set because it’s different from every element by one element. For example, it’s different from 🍟 because 🍟 does not contain 🍟,but the new element contains 🍟 (as we flipped the diagonal).</p>
+
+<p>Note that we don’t actually need to use the strict diagonal; we can use other combination as long as we cover all the bases. For example, we can choose the following elements.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+    </tr>
+    <tr>
+        <th>🍟</th>
+        <td></td>
+        <td>✅</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🍕</th>
+        <td>🅾️</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥪</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✅</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🌮</th>
+        <td></td>
+        <td></td>
+        <td>✅</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥨</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>🅾️</td>
+    </tr>
+</table>
+
+<p>Like before, we flip them.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+    </tr>
+    <tr>
+        <th>🍟</th>
+        <td></td>
+        <td>🅾️</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🍕</th>
+        <td>✅</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥪</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>🅾️</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🌮</th>
+        <td></td>
+        <td></td>
+        <td>🅾️</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥨</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>️✅</td>
+    </tr>
+</table>
+
+<p>And make a new set that is not in the universe.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+    </tr>
+    <tr>
+        <th>??</th>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>✅</td>
+    </tr>
+</table>
+
+<p>Now that we have made at least one element that is not in the set, we can conclude that the universal set, which should contain every possible set, has more than $5$ elements. A set of $5$ elements is too small to contain the universe! By the look of it, we need at least $2^5 = 32$ sets to cover all the combinations of the $5$ sets, but that only shifts the problem back. By the time our set is $32$ element large, we need $2^{32} = 4294967296$ sets to cover all the combination of the $32$ sets, and ad infinitum. Just like exponential growth, the size quickly explodes.</p>
+
+<p>Our problem at hand is, unfortunately, worse than ad infinitum. The universe can’t even be contained by a set of infinite set! Let’s apply our reasoning to the actual universal set to see why.</p>
+
+<h1 id="a-large-universe">A Large Universe</h1>
+
+<p>Let’s assume that the universal set exists. Just like before, we write out the universal set in the following table. Naturally the sets we had before are also elements of the universal set, so we will write them out first.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+        <th>...</th>
+    </tr>
+    <tr>
+        <th>🍟</th>
+        <td>🅾️</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>...</td>
+    </tr>
+    <tr>
+        <th>🍕</th>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥪</th>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🌮</th>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>✅</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥨</th>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>...</th>
+        <td>...</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<p>Similarly, we can also construct an element by inverting the diagonal elements, to make something like</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+        <th>...</th>
+    </tr>
+    <tr>
+        <th>?</th>
+        <td>✅</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>...</td>
+    </tr>
+</table>
+
+<p>But this element is not in the universal set, because it is different from every set by one element. Therefore, we reach a paradox such that no matter how big the universal set is, it can be bigger.</p>
+
+<p>So what? Can’t we just make it bigger and include the new element? Yes, but the key is that we have already <em>assumed</em> that we have everything in the universal set at first. We have reached a contradiction. We have carefully reasoned our way through, so the problem must lie the assumption. It is also important to note that this is different from infinity. Infinity, in set theory, is a defined concept, whereas this is a logical paradox.</p>
+
+<p>Notice that flipping the diagonal elements is essentially the same as saying “include every element that does not include itself”, because if the diagonal element is 🅾️, it means it does not contain itself. We the flip it so that the new set contains it, and vise versa. With this view in mind, if we ban self reference, our argument would still work, because we don’t really have to choose the diagonal elements. We can, for example, shift the selection to the left or right by one.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+        <th>...</th>
+    </tr>
+    <tr>
+        <th>🍟</th>
+        <td></td>
+        <td>✅</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>...</td>
+    </tr>
+    <tr>
+        <th>🍕</th>
+        <td></td>
+        <td></td>
+        <td>🅾️</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥪</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✅</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🌮</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✅</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>🥨</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>...</th>
+        <td>...</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<p>We flip the elements and make a new set that is not an element of the universal set. For the first element of the set, it doesn’t matter if we include it or not. Just like before, this new element is different from all the elements in the universe.</p>
+
+<table class="table-2d">
+    <tr>
+        <th></th>
+        <th>🍟</th>
+        <th>🍕</th>
+        <th>🥪</th>
+        <th>🌮</th>
+        <th>🥨</th>
+        <th>...</th>
+    </tr>
+    <tr>
+        <th>???</th>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>✅</td>
+        <td>🅾️</td>
+        <td>🅾️</td>
+        <td>...</td>
+    </tr>
+</table>
+
+<p>Also, just like last time, we can choose any random elements, as long as we make sure to choose at least one unique element from every set.</p>
+
+<p>For those who desire some more mathematical formalism, the above sentence translates to the following statement.</p>
+
+\[S = \{x \in U: x \notin f(x) \}\]
+
+<p>where $f$ is a surjective function from $U$ onto $U$. Now we ask: is $f^{-1}(S)$ <sup id="fnref:inverse-function" role="doc-noteref"><a href="#fn:inverse-function" class="footnote" rel="footnote">3</a></sup> in $S$? It if isn’t in $S$, it is in $S$, and if it is in $S$, it is not in $S$.</p>
+
+<p>In this argument, we didn’t really make use of self reference because that is not the root cause of the paradox. It is rather because the universe is too big to be a set.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Hopefully, by now you have gotten an intuitive sense why the universal set is too big to be a set. No matter how big the universal set it, it should be much much bigger. It also follows that for any set, no matter how large, is the small part compared to all the set that exists. This really humbles us. There is so much out there that is unknown, beyond what our eyes can see and the physical universe. Whether you believe these sets are objective existence in Plato’s world of forms, it’s truly breathtaking to see the curious properties of the universe of sets.</p>
+
+<p>This paradox does not break set theory, but it rather shows that unrestricted comprehension – one can add whatever to a set – leads to inconsistency, a set that is too big to be a set. So mathematicians have to very careful making a set bigger, through more “restricted” comprehension such as the Axiom of Pairing, the Axiom of Union, and the Axiom of Power Set. If you want to study it further, please look up Zermelo–Fraenke (ZFC) set theory.</p>
+
+<p>If we want to be fancy, we can proclaim “God is dead, and the universe doesn’t exist!”</p>
+
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:ban-self-reference" role="doc-endnote">
+      <p>It’s tempting to argue that we can avoid the paradox all together if we disallow a set to contain itself, but that is not a valid because a similar paradox can be formed. It will be much clearer as we introduce the new view. <a href="#fnref:ban-self-reference" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:set-definition" role="doc-endnote">
+      <p>Another major motivation of set theory is to formalize all systems of math in order to make them rigours, creating a solid foundation for used-to-be “intuitive” axioms and definitions. This scheme would best avoid inconsistency and falsehood. <a href="#fnref:set-definition" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:inverse-function" role="doc-endnote">
+      <p>Because $f$ is a surjection function, it does not have an inverse in the algebraic sense, but for now, we can view $f^{-1}(x)$ as <em>one of</em> the input that would give $x$ when inputted to $f$. <a href="#fnref:inverse-function" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[We investigate infinity with set theory, which deals with sets - collections of things, like the set of all natural numbers and the set of all polygons. Sets can contain anything (including sets) and can be however large. But even though a set can be easily larger than the entire physical (not just the observable) universe, there are sets that are too large to be a set. One of them is the set of everything (a.k.a. the universal set). Known as the Russell’s Paradox, the proof itself is as spectacular as the result: the attempt to create a foundation for math through set theory accidentally created a creature too large to be contained.]]></summary></entry><entry><title type="html">Speaking Faster (by a million times) Changes the World</title><link href="/2021/07/04/human-io-speed.html" rel="alternate" type="text/html" title="Speaking Faster (by a million times) Changes the World" /><published>2021-07-04T00:00:00+00:00</published><updated>2021-07-04T00:00:00+00:00</updated><id>/2021/07/04/human-io-speed</id><content type="html" xml:base="/2021/07/04/human-io-speed.html"><![CDATA[<p>If we can speak faster (roughly a million times faster), we can tell people who have never tasted chocolate what chocolate tastes like, we won’t need education or specialization, and we’ll live in a much better world.</p>
+
+<p>Human communication is tricky. It can lead to misunderstanding, or even conflict. And countless number of literature works explore the theme. Some think it’s beautiful that human communications isn’t so clear or black and white, but I think it’s merely a deficiency because we speak too slowly.</p>
+
+<p>Human speaks so slowly that if your internet speed that slow, it would take 247 days to load a single photo on instagram <sup id="fnref:photo-calc" role="doc-noteref"><a href="#fn:photo-calc" class="footnote" rel="footnote">1</a></sup>. It is obviously unacceptable, but why do we not feel it being prohibitively slow? Because we are very good at choosing what is essential to convey and how to say them most effectively, which in computer terms, a extremely high compression ratio. And also because we are used to it. The world could change a lot if we could speak faster (through brain implant for example).</p>
+
+<h1 id="how-human-compress-information-extremely-effectively">How Human Compress Information Extremely Effectively</h1>
+
+<p>You are probably familiar with compression. From zipping flies to make them smaller, making a picture smaller to fit the upload file size constrains, to choosing lower quality Spotify music to save data, you already experienced how compression can make files smaller by getting rid of details and more efficiently encoding data.</p>
+
+<p>Usually, for video and audio, we can achieve 100:1 compression ratio (meaning the uncompressed data is 100 times bigger than the compressed one) with a some noticeable loss in quality. But human compression take it to an extreme, effortlessly skyrocketing it to 100,000:1, a thousand times higher than computer compression, because we can easily describe a picture with 400 words <sup id="fnref:paragraph-calc" role="doc-noteref"><a href="#fn:paragraph-calc" class="footnote" rel="footnote">2</a></sup>. To view it differently, the information in a books can easily fit into a photo. “A picture is worth a thousand words” is perhaps an understatement.</p>
+
+<p>The high compression ratio makes up for the slow speed. But how exactly do humans achieve that? They do by using labels, shared knowledge (oh no IB TOK flashbacks), context and <a href="https://www.youtube.com/watch?v=IJEaMtNN_dM">Gricean Maxims</a>.</p>
+
+<p>Compression algorithms often use something called a dictionary. Much like real dictionaries, it contains “words” and “meanings” <sup id="fnref:dict" role="doc-noteref"><a href="#fn:dict" class="footnote" rel="footnote">3</a></sup>. Data that often repeats (e.g. the word “the”) are replaced with something shorter (e.g. “t”) while its replacement recorded in the dictionary.</p>
+
+<p>Human uses a dictionary on a much larger scale with labeling. While, to express an airplane in picture, the picture has to contain information on the exact shape of the wings, fuselage, etc., but humans can just use the word “airplane” to label it. To add more details, we would construct more elaborate sentences and paragraph to add labels and state their relationships. Labeling are more prominent in technical fields like natural sciences. For example, “prime number” would be a very short label for its long definition <sup id="fnref:definition" role="doc-noteref"><a href="#fn:definition" class="footnote" rel="footnote">4</a></sup>. Labels like “3d orbitals” would capture more information about atomic structure. Our extensive use of labels and their lengthy and complicated definition makes education necessary (among other reasons which we’ll explore later).</p>
+
+<p>Unlike in computer compression, where the dictionary is sent along with data, the dictionary we use is not communicated in a conversation because our communication speed is too slow for that (recall the last time you tried to talk about a topic unfamiliar to your listener and you had to explain everything). The dictionary is assumed to be shared through life experience and education. The shared knowledge also includes social expectations, cultural conventions, etc. In that sense, misunderstanding and culture shock are all results of the dictionary between you and the other people being mismatched. The problems sometimes take a lot of time to resolve because communication is slow compared to the body of shared knowledge.</p>
+
+<p>Naturally, since communicating information is time consuming, humans have unspoken rules which purpose is to increase commutation efficiency called <a href="https://www.youtube.com/watch?v=IJEaMtNN_dM">Gricean Maxims</a> (<a href="https://www.ucl.ac.uk/ls/studypacks/Grice-Logic.pdf">original paper</a>). These are (paraphrased):</p>
+<ol>
+  <li>Maxim of Quantity: Give no more or less information than necessary.</li>
+  <li>Maxim of Quality: Give information that is cooperative.</li>
+  <li>Maxim of Relation: Give information that is related.</li>
+  <li>Maxim of Manner: Be clear.</li>
+</ol>
+
+<p>Using these principles, we can reasonably infer information not explicitly stated. For example, if someone answers you “there’s a garage down the road” to your statement “I am out of petrol”, you can infer that “garage” probably is a british slag for a gas station.</p>
+
+<p>Chocolate is impossible to describe to someone who hasn’t tasted it because the word chocolate doesn’t have corresponding meaning in their dictionary and taste (and many other sensory information) contains too much information to be communicated through words. Technologies that we developed, such as screens and speakers can already, through their high speed, allow people to see and hear completely novel things. Even though, much often, the source of the information is from the natural world (such as photograph and recording), it can also be from a human such as painting and animation, which are painfully made with hours and hours of work, sometimes with nothing but painfully typed text like early-day computer graphics. Essentially, information is slowly outputted by a human, stored using technologies, and outputted quickly through our faster senses like eyes and ears.</p>
+
+<h1 id="consequences-of-slow-communication-speed">Consequences of Slow Communication Speed</h1>
+
+<ol>
+  <li>Education becomes necessary for a well developed society</li>
+  <li>Specialization improves efficiency</li>
+</ol>
+
+<p>Everyone understands the importance of education (ignoring those who believe education is a big conspiracy to condition citizens into obedience). From the lens of human communication, education is essentially a decade long process of loading the huge dictionary of human shared knowledge into a person. It takes so long because absorbing information is very slow.</p>
+
+<p>Information is slow to absorb, but can travel quickly in one’s brain. Looking for information in the world is painfully slow, especially without aid (like Google). But looking for information you already know is very fast. You’ve probably had moments when you remember someone you’ve read but can’t find where it’s from. Similarly, writing about a familiar subject is so much easier than an unfamiliar because you can look up information in your brain. As a society we have decided that loading all the information upfront through decade long education is more efficient than learning on demand.</p>
+
+<p>Specialization is also a product of the slow communication speed. Collaboration is inherently limited because we cannot get ideas across fast enough for very complex tasks. That is why books are usually written with one person, math theorems are rarely team efforts. But the same time, dividing tasks allows one to devote more time to excel at the task. So naturally, tasks are divided at intersections without much information flow. Physicists wouldn’t need to know much about history and vice versa.</p>
+
+<h1 id="predictions-for-machine-brain-interface">Predictions for Machine-Brain Interface</h1>
+
+<p>Imagine that ono day technologies is advanced enough that we can develop a chip that can be implanted in everyone’s brain that gives everyone a million times faster communication speed. How different would the world be? It will be very different, most significantly, education and specialization would no long exist.</p>
+
+<p>Education would be abolished because when you can read a book in one second, there is no need to read it in advance. You would just read a book or learn a skill when you need it (like how they can “load” a skill in The Matrix). More over, it’s even possible that there is no need to learn or “load” anything. The act of loading in a computer essentially copies data from a slower medium to a faster medium (e.g. loading from hard drive to RAM), so does learning (e.g. moving information from books to your brain). As technologies get better, searching information through the internet might get faster than searching it in your head. For example, when you need a quote for an essay, you wouldn’t read 10 books to find it (even though it just takes 10 second), instead you would tell Google what you need and select from the thousands of individual quotes. To you subjectively, it would feel like the content is “already there” and you just need to use it.</p>
+
+<p>We see the trend of going from loading everything upfront to loading as needed in the development of computer. We used to spend hours download programs or days buying CDs of programs for computer to run, to using more and more applications run in browsers (called web apps). When you open Google Docs, it opens very quickly even though word processing applications can take minutes to hour to download, because it loads only the component you need now, moving some computation to the cloud, leaving the functions you don’t need right now to be loaded right you need it. Streaming movies is better than downloading movies. It’s the same for purchasing goods. The wisdom goes only buys the things you need when you needed. Generally, it is a much more efficient strategy to learn along the way than to learning upfront <sup id="fnref:memorization" role="doc-noteref"><a href="#fn:memorization" class="footnote" rel="footnote">5</a></sup>.</p>
+
+<p>Specialization would also be eliminated. Collaboration could truly be made effective, even for complex and indivisible tasks. Because learning would not be necessary, there would no need to specialize in order to devote more time to excel at a narrow task. More over, specialization is does not fundamentally increase productivity or creativity, it merely compensates for our slow communication speed. Generalization is natural direction for development. If all else equals, we would much prefer a computer (which is a general computational machine) than a calculator <sup id="fnref:raspi" role="doc-noteref"><a href="#fn:raspi" class="footnote" rel="footnote">6</a></sup>. But in the 1950s, when computer hardware was very expensive, there were specialized computers like the the IBM 1401 that specialize in reading cards, copying tapes, and printing output. The research into general AI also highlights the importance and desirability of having a general intelligence. Theses trends illustrate that specialization only occurs as a necessity when technologies is not good enough for generalization.</p>
+
+<p>More speculatively, perhaps the world would have a single consciousness as tightly connect brains function as one giant brain? Maybe there would be no more conflict of interest that leads to war and suffering because experiences can be easily shared? Or would independent thinking be diminished to the point we all become sheeple controlled by large supplier of knowledge like Google? We don’t yet know, but let’s hope for the better.</p>
+
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:photo-calc" role="doc-endnote">
+      <p>I used a photo posed by my friend on instagram, which, with the heavy compression down by instagram is 142KB (kilobytes, or 1.3 megabits). The speech speed used is 130 words per minute (<a href="https://wordcounter.net/blog/2016/06/02/101702_how-fast-average-person-speaks.html">source</a>). Assuming one word is on average 5 letters, and one letter takes 5 bits to encode (because we only need to encode 26 lower case letters), that makes the speech of our speech 54 bits/second. 1.3 megabits ÷ 54 bits/second = 21307037 seconds = 247 days. <a href="#fnref:photo-calc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:paragraph-calc" role="doc-endnote">
+      <p>Same as the previous photo. 400 words × 5 letters/word × 5 bits/letter = 10000 bits. <a href="#fnref:paragraph-calc" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dict" role="doc-endnote">
+      <p>For the programmer out there, I am referring to keys and values. <a href="#fnref:dict" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:definition" role="doc-endnote">
+      <p>The astute reader might notice I glossed over the problem with definition. What would you define something with but more labels? The popular definition of “prime number” is “a number that cannot be divided by 1 and itself”, but “number”, “divided” are both labels that need their definition. If you (like me) have wondered about this and tried to see dictionary solve this, you will find definitions are often circular. For a simple exercise, start the word “love”. Fortunately, you and I are not the first one to be troubled by the definition problem. Mathematics (especially formalism) deals with accurately defining structures extensively by essentially establishing fundamental “words” (called strings) that do not have definitions of their own but are rather “defined” by their relations to other strings by rules of string manipulation. For a more through (and fascinating) discussion on the topic, I recommend the book Godel, Escher, Bach by Douglas R. Hofstadter. <a href="#fnref:definition" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:memorization" role="doc-endnote">
+      <p>There are serval more technical examples of this: caching dynamically as data is being read or changed (memorization technique) is usually less buggy and more efficient than precomputing a lookup table (such as <a href="https://github.com/mit-pdos/noria">noria</a> and APFS). Just-in-time compiling or interpreting is gaining popularity over compiling. <a href="#fnref:memorization" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:raspi" role="doc-endnote">
+      <p>If the costs are equal, you would rather buy a raspberry pi than a micro-controller or even a specially designed circuit. <a href="#fnref:raspi" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[If we can speak faster (roughly a million times faster), we can tell people who have never tasted chocolate what chocolate tastes like, we won’t need education or specialization, and we’ll live in a much better world.]]></summary></entry><entry><title type="html">Use Ad-blocking DNS to Block Ads everywhere</title><link href="/2020/12/14/use-custom-dns-to-block-ads.html" rel="alternate" type="text/html" title="Use Ad-blocking DNS to Block Ads everywhere" /><published>2020-12-14T00:00:00+00:00</published><updated>2020-12-14T00:00:00+00:00</updated><id>/2020/12/14/use-custom-dns-to-block-ads</id><content type="html" xml:base="/2020/12/14/use-custom-dns-to-block-ads.html"><![CDATA[<p>If you want to block ads everywhere for any device without installing any apps, including in TV boxes and mobile games, you can use a DNS server that blocks ad. Here I go over briefly how you can set it up and how it works.</p>
+
+<h2 id="advanced-guide">Advanced Guide</h2>
+
+<p>The DNS server I host is at ip address <code class="language-plaintext highlighter-rouge">14.198.1.214</code>. It is located in Hong Kong.</p>
+
+<h2 id="step-by-step">Step by Step</h2>
+<p>The following is a condensed version of the guide. Depending on the device that you are using, the steps vary. Therefor I am just going to go through the set up procedure for common platforms. Usually the computer will ask for two DNS address, so put the same address for both or leave the second one blank<sup id="fnref:why-dns-option" role="doc-noteref"><a href="#fn:why-dns-option" class="footnote" rel="footnote">1</a></sup>.</p>
+
+<h3 id="for-router">For router</h3>
+<p>I recommend you set it on your router because the changes will also be automatically applied to all the devices connected to the network.
+Routers have very different ways to configure and set the DNS server address, so it’s better if you Google yourself how to configure for your specific router.</p>
+
+<h3 id="for-ios">For iOS</h3>
+<ol>
+  <li>Go to <strong>Settings</strong>.</li>
+  <li>Go to <strong>Wi-Fi</strong> (it is impossible to set DNS for mobile networks).</li>
+  <li>Tap on the name of the currently active network.</li>
+  <li>In the <strong>DNS</strong> field enter the address <code class="language-plaintext highlighter-rouge">14.198.1.214</code>.</li>
+</ol>
+
+<h3 id="for-android">For Android</h3>
+<ol>
+  <li>Go to <strong>Settings</strong>.</li>
+  <li>Go to <strong>Wi-Fi</strong>.</li>
+  <li>Long press on the name of the currently active network and select <strong>Modify Network</strong>.</li>
+  <li>Find the IP setting (it might be in the <strong>Advanced</strong> tab), change it from DHCP to Static and change both <strong>DNS 1</strong> and <strong>DNS 2</strong> to <code class="language-plaintext highlighter-rouge">14.198.1.214</code>.</li>
+</ol>
+
+<h3 id="for-windows">For Windows</h3>
+<ol>
+  <li>Go to <strong>Control Panel</strong>.</li>
+  <li>Go to <strong>Network and Internet</strong>, and then go to <strong>Network and Sharing Center</strong>.</li>
+  <li>On the left side of the screen, select <strong>Change adapter settings</strong>.</li>
+  <li>Right Click on the network and select <strong>Properties</strong>.</li>
+  <li>Select <strong>Properties</strong> for <strong>Internet Protocol Version 4 (TCP/IP)</strong>.</li>
+  <li>Change the <strong>DNS server addresses</strong> to <code class="language-plaintext highlighter-rouge">14.198.1.214</code>.</li>
+</ol>
+
+<h3 id="for-mac-os">For Mac OS</h3>
+<ol>
+  <li>Go to <strong>System Preferences</strong>.</li>
+  <li>Click on <strong>Network</strong>.</li>
+  <li>Select the first connection in the list on the left, and select <strong>Advanced</strong>.</li>
+  <li>Select the <strong>DNS</strong> tab and add (and only add) <code class="language-plaintext highlighter-rouge">14.198.1.214</code>.</li>
+</ol>
+
+<p>For additional resources, you can google “how to change DNS server on xxx device”.</p>
+
+<h2 id="dns-sinkhole-101">DNS Sinkhole 101</h2>
+
+<h3 id="what-is-a-domain-name-system-dns-server">What is a Domain Name System (DNS) Server?</h3>
+<p>By the design of internet, computers connected are identified (located) by an IP address. But it became quite annoying to remember the IP address of computers, so born the Domain Name System (DNS) <sup id="fnref:dns" role="doc-noteref"><a href="#fn:dns" class="footnote" rel="footnote">2</a></sup>.</p>
+
+<p>When you go to a website, say <a href="https://google.com">https://google.com</a>, your computer needs to know the IP address of the server (in this case <code class="language-plaintext highlighter-rouge">172.217.161.142</code>) in order to communicate with the server. Your computer would send a request to the default DNS server to ask for the IP address associated with google.com, then your computer would follow that IP address to request for the webpage. Of course, you don’t see the IP address in your address bar because all these happen behind the scene.</p>
+
+<h3 id="what-is-a-dns-sinkhole">What is a DNS sinkhole?</h3>
+<p>A DNS sinkhole is a specially programmed DNS server that does not return you the address of known domain name used to host ads<sup id="fnref:ad-dns" role="doc-noteref"><a href="#fn:ad-dns" class="footnote" rel="footnote">3</a></sup>. For example <code class="language-plaintext highlighter-rouge">https://acdn.adnxs.com/</code> is used to exclusively host ads.</p>
+
+<p>I am (obviously) not the only one providing an DNS sinkhole; AdGuard and many others also provides many<sup id="fnref:why-dns" role="doc-noteref"><a href="#fn:why-dns" class="footnote" rel="footnote">4</a></sup>.</p>
+
+<h2 id="privacy-concerns">Privacy Concerns</h2>
+<p>If you use my DNS ad blocker, does that mean I can see you what you are doing online?
+No, because</p>
+<ol>
+  <li>I have no interest in what you do.</li>
+  <li>I have disabled logging and analytics. completely (to the best of my knowledge). I can only see how many requests I am getting, but not from who. I promise that I will never turn it on because I don’t believe in tracking.</li>
+  <li>I am unable to. The webpages you visit are encrypted and the connection doesn’t even go through the server. The server only receives the domain name, not even the entire url.</li>
+</ol>
+
+<h2 id="make-your-own-dns-server-with-pi-hole">Make your own DNS server with pi-hole</h2>
+<p>A “server” sounds intimidating but it actually is not. It requires nothing more than a computer (no matter how slow or cheap because DNS server virtually takes no power). You can make one yourself if you want more speed and control over your network. Just go to <a href="https://pi-hole.net">pi-hole.net</a> to learn how to set up. Linus Tech Tips also made an <a href="https://youtu.be/KBXTnrD_Zs4">excellent tutorial</a> on that.</p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>In short: I don’t guarantee it will work so please don’t sue me if it doesn’t.</p>
+
+<p>In long:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>THE SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE PROVIDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SERVICES.
+</code></pre></div></div>
+
+<h1 id="acknowledgement">Acknowledgement</h1>
+
+<p>I used <a href="https://pi-hole.net/">pi-hole</a> as the DNS snikhole, running on a Raspberry Pi. I used Google DNS as the upstream DNS server. The block lists I used are</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+https://mirror1.malwaredomains.com/files/justdomains
+</code></pre></div></div>
+
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:why-dns-option" role="doc-endnote">
+      <p>WHy not use a back up DNS? When your computer fails to get an IP address from the primary DNS server, it will consult the secondary DNS server. So if your second DNS server does not block ad, ad-blocking would not work. Your computer can still load the ad by using the secondary DNS. <a href="#fnref:why-dns-option" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dns" role="doc-endnote">
+      <p>Why not just use domain name instead of ip address in the first place? Perhaps it’s for backward compatibility. It was originally designed with numbers as IP addresses and we are just stuck with it, just like we are stuck with using numbers instead of username for phones. <a href="#fnref:dns" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:ad-dns" role="doc-endnote">
+      <p>Luckily most ads are hosted on separate domain names as the main contents. For example, Google hosts some ads under <code class="language-plaintext highlighter-rouge">ads.google.com</code> and its google search is under <code class="language-plaintext highlighter-rouge">www.google.com</code>. However, some websites server their content and ads from the same sever such as YouTube and Instagram, in which case the ad blocker would not be able to block them (otherwise it would block the legit contents as well). <a href="#fnref:ad-dns" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:why-dns" role="doc-endnote">
+      <p>So why am I making another one that already exists? The one by ad-guard is in Europe and the latency is high. Mine is in Hong Kong, which is perfect if you live in Hong Kong. <a href="#fnref:why-dns" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Deyao Chen</name></author><summary type="html"><![CDATA[If you want to block ads everywhere for any device without installing any apps, including in TV boxes and mobile games, you can use a DNS server that blocks ad. Here I go over briefly how you can set it up and how it works.]]></summary></entry></feed>

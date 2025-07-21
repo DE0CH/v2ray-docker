@@ -1,0 +1,197 @@
+  <!DOCTYPE html>
+  <html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Use Ad-blocking DNS to Block Ads everywhere | Deyao’s Blog</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Use Ad-blocking DNS to Block Ads everywhere" />
+<meta name="author" content="Deyao Chen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="If you want to block ads everywhere for any device without installing any apps, including in TV boxes and mobile games, you can use a DNS server that blocks ad. Here I go over briefly how you can set it up and how it works." />
+<meta property="og:description" content="If you want to block ads everywhere for any device without installing any apps, including in TV boxes and mobile games, you can use a DNS server that blocks ad. Here I go over briefly how you can set it up and how it works." />
+<meta property="og:site_name" content="Deyao’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-12-14T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Use Ad-blocking DNS to Block Ads everywhere" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Deyao Chen"},"dateModified":"2020-12-14T00:00:00+00:00","datePublished":"2020-12-14T00:00:00+00:00","description":"If you want to block ads everywhere for any device without installing any apps, including in TV boxes and mobile games, you can use a DNS server that blocks ad. Here I go over briefly how you can set it up and how it works.","headline":"Use Ad-blocking DNS to Block Ads everywhere","mainEntityOfPage":{"@type":"WebPage","@id":"/2020/12/14/use-custom-dns-to-block-ads.html"},"url":"/2020/12/14/use-custom-dns-to-block-ads.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Deyao&#39;s Blog</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Use Ad-blocking DNS to Block Ads everywhere</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-12-14T00:00:00+00:00" itemprop="datePublished">Dec 14, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>If you want to block ads everywhere for any device without installing any apps, including in TV boxes and mobile games, you can use a DNS server that blocks ad. Here I go over briefly how you can set it up and how it works.</p>
+
+<h2 id="advanced-guide">Advanced Guide</h2>
+
+<p>The DNS server I host is at ip address <code class="language-plaintext highlighter-rouge">14.198.1.214</code>. It is located in Hong Kong.</p>
+
+<h2 id="step-by-step">Step by Step</h2>
+<p>The following is a condensed version of the guide. Depending on the device that you are using, the steps vary. Therefor I am just going to go through the set up procedure for common platforms. Usually the computer will ask for two DNS address, so put the same address for both or leave the second one blank<sup id="fnref:why-dns-option" role="doc-noteref"><a href="#fn:why-dns-option" class="footnote" rel="footnote">1</a></sup>.</p>
+
+<h3 id="for-router">For router</h3>
+<p>I recommend you set it on your router because the changes will also be automatically applied to all the devices connected to the network.
+Routers have very different ways to configure and set the DNS server address, so it’s better if you Google yourself how to configure for your specific router.</p>
+
+<h3 id="for-ios">For iOS</h3>
+<ol>
+  <li>Go to <strong>Settings</strong>.</li>
+  <li>Go to <strong>Wi-Fi</strong> (it is impossible to set DNS for mobile networks).</li>
+  <li>Tap on the name of the currently active network.</li>
+  <li>In the <strong>DNS</strong> field enter the address <code class="language-plaintext highlighter-rouge">14.198.1.214</code>.</li>
+</ol>
+
+<h3 id="for-android">For Android</h3>
+<ol>
+  <li>Go to <strong>Settings</strong>.</li>
+  <li>Go to <strong>Wi-Fi</strong>.</li>
+  <li>Long press on the name of the currently active network and select <strong>Modify Network</strong>.</li>
+  <li>Find the IP setting (it might be in the <strong>Advanced</strong> tab), change it from DHCP to Static and change both <strong>DNS 1</strong> and <strong>DNS 2</strong> to <code class="language-plaintext highlighter-rouge">14.198.1.214</code>.</li>
+</ol>
+
+<h3 id="for-windows">For Windows</h3>
+<ol>
+  <li>Go to <strong>Control Panel</strong>.</li>
+  <li>Go to <strong>Network and Internet</strong>, and then go to <strong>Network and Sharing Center</strong>.</li>
+  <li>On the left side of the screen, select <strong>Change adapter settings</strong>.</li>
+  <li>Right Click on the network and select <strong>Properties</strong>.</li>
+  <li>Select <strong>Properties</strong> for <strong>Internet Protocol Version 4 (TCP/IP)</strong>.</li>
+  <li>Change the <strong>DNS server addresses</strong> to <code class="language-plaintext highlighter-rouge">14.198.1.214</code>.</li>
+</ol>
+
+<h3 id="for-mac-os">For Mac OS</h3>
+<ol>
+  <li>Go to <strong>System Preferences</strong>.</li>
+  <li>Click on <strong>Network</strong>.</li>
+  <li>Select the first connection in the list on the left, and select <strong>Advanced</strong>.</li>
+  <li>Select the <strong>DNS</strong> tab and add (and only add) <code class="language-plaintext highlighter-rouge">14.198.1.214</code>.</li>
+</ol>
+
+<p>For additional resources, you can google “how to change DNS server on xxx device”.</p>
+
+<h2 id="dns-sinkhole-101">DNS Sinkhole 101</h2>
+
+<h3 id="what-is-a-domain-name-system-dns-server">What is a Domain Name System (DNS) Server?</h3>
+<p>By the design of internet, computers connected are identified (located) by an IP address. But it became quite annoying to remember the IP address of computers, so born the Domain Name System (DNS) <sup id="fnref:dns" role="doc-noteref"><a href="#fn:dns" class="footnote" rel="footnote">2</a></sup>.</p>
+
+<p>When you go to a website, say <a href="https://google.com">https://google.com</a>, your computer needs to know the IP address of the server (in this case <code class="language-plaintext highlighter-rouge">172.217.161.142</code>) in order to communicate with the server. Your computer would send a request to the default DNS server to ask for the IP address associated with google.com, then your computer would follow that IP address to request for the webpage. Of course, you don’t see the IP address in your address bar because all these happen behind the scene.</p>
+
+<h3 id="what-is-a-dns-sinkhole">What is a DNS sinkhole?</h3>
+<p>A DNS sinkhole is a specially programmed DNS server that does not return you the address of known domain name used to host ads<sup id="fnref:ad-dns" role="doc-noteref"><a href="#fn:ad-dns" class="footnote" rel="footnote">3</a></sup>. For example <code class="language-plaintext highlighter-rouge">https://acdn.adnxs.com/</code> is used to exclusively host ads.</p>
+
+<p>I am (obviously) not the only one providing an DNS sinkhole; AdGuard and many others also provides many<sup id="fnref:why-dns" role="doc-noteref"><a href="#fn:why-dns" class="footnote" rel="footnote">4</a></sup>.</p>
+
+<h2 id="privacy-concerns">Privacy Concerns</h2>
+<p>If you use my DNS ad blocker, does that mean I can see you what you are doing online?
+No, because</p>
+<ol>
+  <li>I have no interest in what you do.</li>
+  <li>I have disabled logging and analytics. completely (to the best of my knowledge). I can only see how many requests I am getting, but not from who. I promise that I will never turn it on because I don’t believe in tracking.</li>
+  <li>I am unable to. The webpages you visit are encrypted and the connection doesn’t even go through the server. The server only receives the domain name, not even the entire url.</li>
+</ol>
+
+<h2 id="make-your-own-dns-server-with-pi-hole">Make your own DNS server with pi-hole</h2>
+<p>A “server” sounds intimidating but it actually is not. It requires nothing more than a computer (no matter how slow or cheap because DNS server virtually takes no power). You can make one yourself if you want more speed and control over your network. Just go to <a href="https://pi-hole.net">pi-hole.net</a> to learn how to set up. Linus Tech Tips also made an <a href="https://youtu.be/KBXTnrD_Zs4">excellent tutorial</a> on that.</p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>In short: I don’t guarantee it will work so please don’t sue me if it doesn’t.</p>
+
+<p>In long:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>THE SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE PROVIDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SERVICES.
+</code></pre></div></div>
+
+<h1 id="acknowledgement">Acknowledgement</h1>
+
+<p>I used <a href="https://pi-hole.net/">pi-hole</a> as the DNS snikhole, running on a Raspberry Pi. I used Google DNS as the upstream DNS server. The block lists I used are</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+https://mirror1.malwaredomains.com/files/justdomains
+</code></pre></div></div>
+
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:why-dns-option" role="doc-endnote">
+      <p>WHy not use a back up DNS? When your computer fails to get an IP address from the primary DNS server, it will consult the secondary DNS server. So if your second DNS server does not block ad, ad-blocking would not work. Your computer can still load the ad by using the secondary DNS. <a href="#fnref:why-dns-option" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dns" role="doc-endnote">
+      <p>Why not just use domain name instead of ip address in the first place? Perhaps it’s for backward compatibility. It was originally designed with numbers as IP addresses and we are just stuck with it, just like we are stuck with using numbers instead of username for phones. <a href="#fnref:dns" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:ad-dns" role="doc-endnote">
+      <p>Luckily most ads are hosted on separate domain names as the main contents. For example, Google hosts some ads under <code class="language-plaintext highlighter-rouge">ads.google.com</code> and its google search is under <code class="language-plaintext highlighter-rouge">www.google.com</code>. However, some websites server their content and ads from the same sever such as YouTube and Instagram, in which case the ad blocker would not be able to block them (otherwise it would block the legit contents as well). <a href="#fnref:ad-dns" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:why-dns" role="doc-endnote">
+      <p>So why am I making another one that already exists? The one by ad-guard is in Europe and the latency is high. Mine is in Hong Kong, which is perfect if you live in Hong Kong. <a href="#fnref:why-dns" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2020/12/14/use-custom-dns-to-block-ads.html" hidden></a>
+</article>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Deyao Chen</li><li><a class="u-email" href="mailto:chendeyao000@gmail.com">chendeyao000@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/de0ch"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">de0ch</span></a></li><li><a href="https://instagram.com/deyaochen"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">deyaochen</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I am just another person trying to do something useful for the world. I write mostly about math and programming, occasionally about some other randoms thoughts I have.
+</p><p><a href="https://github.com/de0ch/de0ch.github.io">Source Code on Github</a></p></div>
+    </div>
+
+  </div>
+
+</footer>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>          
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+  </body>
+  
+  </html>
+  

@@ -1,0 +1,138 @@
+  <!DOCTYPE html>
+  <html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Why Decentralised Web Fails | Deyao’s Blog</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Why Decentralised Web Fails" />
+<meta name="author" content="Deyao Chen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Recently, or rather a few years ago, there has been quite some buzz with web 3.0 powered by blockchain. To me, this is complete nonsense. Technology before blockchain is more than enough to enable a decentralized web. Decentralization did not happen rather because it is inefficient and therefore outcompeted by centralization." />
+<meta property="og:description" content="Recently, or rather a few years ago, there has been quite some buzz with web 3.0 powered by blockchain. To me, this is complete nonsense. Technology before blockchain is more than enough to enable a decentralized web. Decentralization did not happen rather because it is inefficient and therefore outcompeted by centralization." />
+<meta property="og:site_name" content="Deyao’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-09-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Why Decentralised Web Fails" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Deyao Chen"},"dateModified":"2023-09-03T00:00:00+00:00","datePublished":"2023-09-03T00:00:00+00:00","description":"Recently, or rather a few years ago, there has been quite some buzz with web 3.0 powered by blockchain. To me, this is complete nonsense. Technology before blockchain is more than enough to enable a decentralized web. Decentralization did not happen rather because it is inefficient and therefore outcompeted by centralization.","headline":"Why Decentralised Web Fails","mainEntityOfPage":{"@type":"WebPage","@id":"/2023/09/03/decentralized-fail.html"},"url":"/2023/09/03/decentralized-fail.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Deyao&#39;s Blog</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Why Decentralised Web Fails</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-09-03T00:00:00+00:00" itemprop="datePublished">Sep 3, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Recently, or rather a few years ago, there has been quite some buzz with web 3.0 powered by blockchain. To me, this is complete nonsense. Technology before blockchain is more than enough to enable a decentralized web. Decentralization did not happen rather because it is inefficient and therefore outcompeted by centralization.</p>
+
+<p>Blockchain, on the other hand, solves a completely different problem that has little to do with decentralization. So allow me to first go on this tangent to explain why blockchain is irrelevant.</p>
+
+<h2 id="trusted-timestamp-the-only-problem-that-blockchain-solves">Trusted Timestamp: the Only Problem That Blockchain Solves</h2>
+
+<p>When we think of blockchain technology, we often associate it with a transparent ledger, an immutable database, and a collaborative environment. But this is not thanks to blockchain, it is rather thanks to other technologies like peer-to-peer networks and cryptography. You can verify if a message is sent from someone by verifying the digital signature and you can send messages across the internet without a central server by using peer-to-peer network protocols, barring some technical limitations like the limited address space of IPv4. The only feature of blockchain is the trusted generation of a timestamp of an event.</p>
+
+<p>Knowing the time something happens is often critical. For example, if someone spends more money than they have, we should invalidate any payment that happens after they deplete their account. This is traditionally done with a trusted third party, like a bank. Without blockchain and a trusted third party, this is impossible to achieve. After all, anyone can lie about when something happens. There’s no way for any reader of the message to verify if the claimed timestamp is accurate because they could be offline for a while and therefore receive updates out of sync with the actual time they are being sent. Blockchain solves this problem by having everyone vote using their computational power whether they think that an event indeed happens at the time the timestamp claims, or more technically, they vote for the event that claims to happen after the most credible course of history.</p>
+
+<p>Knowing the actual time something happens is important for many applications like trading but for many other things, it is not really important. For example, it’s less important to know when I have published this blog post than that I published this at all and you can read it in its original form untempered thanks to cryptography. It is also not important to know when a file like a TikTok video is created for you to enjoy it.</p>
+
+<h2 id="technology-today-is-sufficient-for-decentralised-web">Technology Today Is Sufficient for Decentralised Web</h2>
+
+<p>Today, you can start hosting a website for close to $0 per month. I host this blog on GitHub pages which costs me nothing and I am able to control the appearance and content of the website. For more complicated apps that, for example, need a database, some platforms do that for free or for a small fee (Heroku used to be a good and free option, although they no longer offer the free plan). If nothing fits your needs, you can always just rent a low-cost computer on Amazon Web Services for a few dollars a month that can do anything. You can also reuse your current computer and internet connection at home to host any website for free. The only technical limitation currently is that one must host a server from a computer that has a public IP, which excludes most mobile and some residential internet connections, but the problem is easily also solved by a reverse proxy/tunnel like playit.gg or ngrok which costs a few dollars a month.</p>
+
+<p>For anyone unfamiliar with coding, there are plenty of open-source tools that streamline the process. The decentralised social media platform Mastodon has guides for setting up your own server to serve content.</p>
+
+<p>Ultimately, it is not that expensive or difficult to start hosting your own website, your own social media platform, or your own anything. The only limit is your skills and imagination.</p>
+
+<h2 id="decentralization-is-inefficient">Decentralization Is Inefficient</h2>
+
+<p>So why isn’t the web sprawling with self-hosted services and websites? This might be because they get outcompeted by bigger and more centralized businesses. Bigger businesses are inherently more efficient and are even more so for tech-related companies. Software has near zero marginal cost and high fixed costs. Therefore a bigger company that has more resources to develop better features can easily out-compete smaller ones. Also, because the marginal cost is zero and most fixed costs like engineering time already spent are sunk costs that should not be considered, competition drives down the unit price to near zero. As a result, the better product developed by big companies easily outcompetes the decentralised ones developed by dedicated communities by either having a better product or better marketing strategy. This is, I believe, more beneficial for consumers as we get better products by paying the same price regardless – near zero. This is also a better allocation of resources because instead of spreading a society’s engineering time to numerous competing products, it is spent on making a few products much better.</p>
+
+<p>Surely, you may say, cooperations should let users host the server programs on their own devices rather than on centralised servers since it costs them nothing either way. But why should they? Centralised servers are far more reliable, and create a better user experience as users don’t need to download a lot of data and code used by servers and it is cheaper to develop and optimise because the target hardware platform is known with few variations. It also makes the software less likely to get stolen. So we will probably never see popular centralized services implemented in a decentralised way.</p>
+
+<h2 id="decentralised-web-ends-up-being-used-for-illegal-stuff">Decentralised Web Ends up Being Used for Illegal Stuff</h2>
+
+<p>Decentralised web gets easily outcompeted for anything legal so it sometimes unfortunately ends up being used for illegal purposes.</p>
+
+<p>Take the BitTorrent protocol as an example. The protocol allows users to do peer-to-peer file transfer without a central storage server. This has the benefit that anyone can put files into the system without paying for any storage and internet costs, and that files in the system can not be censored by authority. It can also download files much faster than centrally hosted files because one can get the file from the closest computer that also runs BitTorrent, which can be much closer, especially for smaller businesses that cannot afford to host many data centres around the world. This technology was invented in 2001. Today, it is often used for pirating software and movies without mainstream adoption. The biggest reason, I believe, is that there is no mainstream support for this protocol. It is not built into any browser like http or ftp: you cannot just click on a link and start downloading straight away. You have to install a dedicated BitTorrent client. Apple explicitly bans any app capable of downloading torrent files.</p>
+
+<p>This is pure speculation, but I believe the reason BitTorrent is not built into most browsers is because it can really hurt their business. After all, who will spend $10 for a movie on YouTube when they can just click on a link on The Pirate Bay and start watching the same thing in the same definition with no ad? I think similar things will also happen to any other decentralised technologies that stop them from getting mainstream adoption.</p>
+
+<p>Cryptocurrencies, especially privacy-focused ones like Monero are mostly used by criminals because of their intractability. According to CNBC, in the first half of 2018, Monero was used in 44% of cryptocurrency ransomware attacks<sup id="fnref:monero-source" role="doc-noteref"><a href="#fn:monero-source" class="footnote" rel="footnote">1</a></sup>.</p>
+
+<h2 id="optimism-or-stockholm-syndrome">Optimism or Stockholm Syndrome?</h2>
+
+<p>Although a decentralised web sounds like a utopia: no evil corporation controls the flow of information or spread propaganda, a centralised web is not necessarily a bad thing. In fact, it is good because a centralised web and by extension, centralised expertise, can create better products that are easy to use and boost innovation than a decentralised web. But at the end of the day, I’ve not seen a decentralised web fully implemented so I have no direct comparison, so this might be just Stockholm Syndrome.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:monero-source" role="doc-endnote">
+      <p>Source: <a href="https://www.cnbc.com/2018/06/07/1-point-1b-in-cryptocurrency-was-stolen-this-year-and-it-was-easy-to-do.html">https://www.cnbc.com/2018/06/07/1-point-1b-in-cryptocurrency-was-stolen-this-year-and-it-was-easy-to-do.html</a> <a href="#fnref:monero-source" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><a class="u-url" href="/2023/09/03/decentralized-fail.html" hidden></a>
+</article>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Deyao Chen</li><li><a class="u-email" href="mailto:chendeyao000@gmail.com">chendeyao000@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/de0ch"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">de0ch</span></a></li><li><a href="https://instagram.com/deyaochen"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">deyaochen</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I am just another person trying to do something useful for the world. I write mostly about math and programming, occasionally about some other randoms thoughts I have.
+</p><p><a href="https://github.com/de0ch/de0ch.github.io">Source Code on Github</a></p></div>
+    </div>
+
+  </div>
+
+</footer>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>          
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+  </body>
+  
+  </html>
+  

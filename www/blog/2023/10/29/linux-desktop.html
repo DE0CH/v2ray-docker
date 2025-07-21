@@ -1,0 +1,112 @@
+  <!DOCTYPE html>
+  <html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Why I Use Windows on Desktop Rather than Linux | Deyao’s Blog</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Why I Use Windows on Desktop Rather than Linux" />
+<meta name="author" content="Deyao Chen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I love using Linux on servers. I run web servers, write code, and do experiments with interesting projects using Linux (specifically Debian and Ubuntu). This blog post explains why I don’t use Linux on desktop." />
+<meta property="og:description" content="I love using Linux on servers. I run web servers, write code, and do experiments with interesting projects using Linux (specifically Debian and Ubuntu). This blog post explains why I don’t use Linux on desktop." />
+<meta property="og:site_name" content="Deyao’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-10-29T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Why I Use Windows on Desktop Rather than Linux" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Deyao Chen"},"dateModified":"2023-10-29T00:00:00+00:00","datePublished":"2023-10-29T00:00:00+00:00","description":"I love using Linux on servers. I run web servers, write code, and do experiments with interesting projects using Linux (specifically Debian and Ubuntu). This blog post explains why I don’t use Linux on desktop.","headline":"Why I Use Windows on Desktop Rather than Linux","mainEntityOfPage":{"@type":"WebPage","@id":"/2023/10/29/linux-desktop.html"},"url":"/2023/10/29/linux-desktop.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+
+
+
+
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Deyao&#39;s Blog</a>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Why I Use Windows on Desktop Rather than Linux</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-10-29T00:00:00+00:00" itemprop="datePublished">Oct 29, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>I love using Linux on servers. I run web servers, write code, and do experiments with interesting projects using Linux (specifically Debian and Ubuntu). This blog post explains why I don’t use Linux on desktop.</p>
+
+<p>I am sorry. I really love Linux and open-source software, but realistically it never worked very well for me. I think this is partially due to the small user base that Linux has and partially due to design choices like the lack of backward compatibility, and the lack of “bloatware”.</p>
+
+<p>I had experimented with using Linux on Desktop for a while. I tried various distros like Ubuntu, Fedora, and Manjaro. I even built an Arch with i3, Rofi, and Polybar (I use Arch btw). Most of the time, installing and getting apps to work takes a long time, especially if I am learning about it for the first time.</p>
+
+<h1 id="backward-compatibility-is-bad-on-linux">Backward Compatibility is Bad on Linux</h1>
+
+<p>Many open-source projects value new features and optimization and the “right” way to write code more than maintaining backward compatibility, which often means maintaining a bad design. As I programmer, I too hate having hacky workaround and messy code lying in the code base. However, as a user, I don’t care. I just want my app to work even if the program runs a little slower or takes a bit more RAM and storage space.</p>
+
+<p>One example of broken backward compatibility is glibc dropping support for DT_HASH in favor of the better-implemented DT_GNU_HASH because the developers of glibc (rightly) think that everyone should be using DT_GNU_HASH. But this broke software like Easy Anti-Cheat which relied on DT_HASH. Granted, fixing many of the breaking changes is extremely trivial, such as renaming a variable, pointing a path somewhere else, or even just recompiling the code to use the new ABI. However, as a developer, it is only trivial if you know what the root cause is, such as the line of code is causing the problem. Finding the problem takes time because usually, the place where the software fails is not where the problem occurs. One needs to spend a lot of time narrowing down the issue. Adding insult to injury, the debugging process is made difficult because all the search results are outdated. Fixing issues is even more difficult as a user of a program because I don’t have access to the source code or the experience to know exactly how to look for the bug.</p>
+
+<p>There are workarounds to these breaking changes. One such project that tires to make programs break less often is Flatpak. Flatpak uses container technology essentially to allow apps to version lock their dependencies and manage multiple versions of the same runtime library on a system.</p>
+
+<p>Contrary to Linux, Microsoft really prioritizes backward compatibility. One example of this is the Excel “bug” that thinks that 1900 was a leap year. This bug was introduced in Lotus 1-2-3 and Microsoft copied the behavior to ensure compatibility with Lotus 1-2-3. This “bug” was never fixed and is even included in the formal specification of Excel to ensure that spreadsheets that used to work continue to work even though the behavior is not correct. There are more examples of Microsoft trying to maintain backward compatibility at the cost of correctness and ease of use for new developers. win32 ABI is still maintained to this day with its numerous flaws and idiosyncrasies. Developer Arek Hiler even wrote a blog post titled “Win32 Is The Only Stable ABI on Linux”. UTF-8 character encoding is still not the default and is marked as beta because some programs still use non-UTF-8 encoding for non-English characters such as a Chinese stock trading app called Zhao Shang Zheng Quan. A new version of Powershell uses a different folder for the profile path to avoid conflict and maintain backward compatibility with the old version.</p>
+
+<p>Microsoft’s obsession with backward compatibility even extends to UI elements. I used to laugh at Windows for still having two settings pages – one called Settings introduced in Windows 10 and the other called Control Panel introduced in Windows 7. The two pages share a lot of the same functions but have different UI layouts. So the inconsistency makes the OS look very ugly. I used to wish for a complete overhaul and unification, but now I understand and appreciate the reasons for choosing to include both programs. I can still change my settings in the same way as I did 10 years ago. Every guide, even ones designed for Windows 7, still works. Even though I haven’t tried, I suspect hacky scripts written that interact with the computer based on graphical UI elements and mouse clicks would more or less still work with minimum changes.</p>
+
+<h1 id="lack-of-bloatware-makes-installing-software-difficult">Lack of Bloatware Makes Installing Software Difficult</h1>
+
+<p>Backward compatibility is similar to how the lack of “bloatware” contributes to a complicated user experience on many Linux distributions. Many packages on Linux ship with the bare minimum to give the user fine control of the features they want to include to reduce “bloat”. For example, when I install xorg-server, which is a program that basically coordinates GUI applications and their windows to be displayed on the screen, on Arch, it doesn’t come with xinit, which is a used to start xorg-server. The reason behind this is that xorg-server and xinit and independent programs. There are many other ways to start xorg-server that do not use xinit. I appreciate this modular approach, but I think most people would want xinit with xorg-server. It took me quite a while, especially as I was installing xorg for the first time, to realise xinit was missing. I was trying to figure out if I installed xorg-server wrong or if my PATH variable was messed up. When something doesn’t work, it always takes time to narrow down the cause and fix it even if it is just one simple install. I would have rather spent the extra bandwidth and disk space to install packages I didn’t need than having to waste a lot of time hunting down the exact missing package. Also, many distributions don’t even come with fonts for other languages like Chinese. It takes a while to find out what the exact Chinese font package is called and how to install it, especially for the first time. The lack of bloat makes the system use minimal RAM and storage. When there is nothing running, my Windows installation on my desktop takes a whopping 10GB whereas my Linux installation only uses a modest 2GB. But I think this is a price worth paying to have a simplified user experience.</p>
+
+  </div><a class="u-url" href="/2023/10/29/linux-desktop.html" hidden></a>
+</article>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Deyao Chen</li><li><a class="u-email" href="mailto:chendeyao000@gmail.com">chendeyao000@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/de0ch"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">de0ch</span></a></li><li><a href="https://instagram.com/deyaochen"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">deyaochen</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I am just another person trying to do something useful for the world. I write mostly about math and programming, occasionally about some other randoms thoughts I have.
+</p><p><a href="https://github.com/de0ch/de0ch.github.io">Source Code on Github</a></p></div>
+    </div>
+
+  </div>
+
+</footer>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>          
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+  </body>
+  
+  </html>
+  
