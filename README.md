@@ -102,7 +102,7 @@ services:
 
 ```
 
-example config
+example config (the port must be 1234)
 
 ```json
 {
